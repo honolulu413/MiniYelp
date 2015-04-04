@@ -28,8 +28,9 @@ app.get('/', routes.do_work);
 app.get('/login', login.do_work);
 app.post('/register', register.post);
 app.get('/user*', user.get);
+app.get('/business_list', business_list.get);
+app.get('/business*', businesses.get);
 app.post('/login', login.post);
-
 
 
 // Listen on the port we specify

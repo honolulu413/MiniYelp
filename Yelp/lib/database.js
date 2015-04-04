@@ -108,6 +108,27 @@ function exist(table, row, handleResults) {
 	}
 }
 
+//if the primary key part of row exist, call handleResults().
+//else, do nothing.
+function allExist(table, row, handleResults) {	
+	if (table.checkLegalData(row) && table.checkPrimaryKey(row)) {
+		var project = require('./table').project;		
+		select(table, row, function(err, results) {
+			if (err !== null) {
+				handleResults(err, null);
+			} else {
+				if (results.length > 0) {
+					handleResults(null, true);
+				} else {
+					handleResults(null, false);
+				}				
+			}
+		});
+	} else {
+		handleResults("invalid row", null);
+	}
+}
+
 //add quote for strings. won't export
 function adjustTypeFormat(table, row) {
 	var newRow = {
@@ -147,6 +168,7 @@ exports.execute = execute;
 exports.insert = insert;
 exports.select = select;
 exports.exist = exist;
+exports.allExist = allExist;
 
 
 

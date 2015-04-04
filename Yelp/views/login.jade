@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+  body
+    block content
+    p
+    | Please enter an actor last name:
+    form(method='get', action='/actor')
+      input(name='name', value='')
+      input(type='submit', value='Show Actors')
+    p
+    | Please register hered:
+    | #{message}
+    form(method='post', action='/register')
+      - for (var i = 0; i < schema.length; i++)
+        label() #{label[i]}
+        input(type='text', name='#{schema[i]}', value='') 
+        br
+      input(type='submit', value='Register')
+      br
+      
+      
+      

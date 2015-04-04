@@ -1,0 +1,17 @@
+// Basic Jade specification for querying for an actor
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /actor once
+// the user hits Submit
+block content
+  p
+    | Please enter an actor last name:
+    form(method='get', action='/actor')
+      input(name='name', value='')
+      input(type='submit', value='Show Actors')
+
+  p
+    | Please enter the last name of the director:
+    form(method='get', action='/director')
+      input(name='name', value='')
+      input(type='submit', value='Show Top 5 Rated Movies')  

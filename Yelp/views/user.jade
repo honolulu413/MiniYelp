@@ -1,0 +1,13 @@
+// Jade file to specify output of an actors list
+// Inherits from layout
+extend layout
+block content
+  p
+    | #{title}:
+  // Create a table with one row per result
+  table
+    tr
+    - for (var key in user)
+      td #{key}  #{user[key]}
+      td &nbsp;
+  // Put a click button that lets us return to the index page 

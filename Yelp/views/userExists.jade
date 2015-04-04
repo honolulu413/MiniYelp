@@ -1,0 +1,8 @@
+extend layout
+block content
+  p.
+  User {userName} already exists! Please try another one.
+  
+  // Put a click button that lets us return to the index page 
+  form(method='get', action='/login')
+      input(type='submit', value='Return')

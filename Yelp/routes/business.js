@@ -3,8 +3,8 @@ var BUSINESSES = require('../lib/table').BUSINESSES;
 
 
 function get(request, respond) {
-	var businessID = /^\/([^/]+)/.exec(request.params[0])[1];
- 
+	var businessID = /^\/([^\/]+)/.exec(request.params[0])[1];
+	
 		database.select(BUSINESSES,
 				{schema : BUSINESSES.primaryKey,
 				data : [businessID]},

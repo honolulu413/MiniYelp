@@ -10,10 +10,11 @@ function object2Row(obj) {
 	}
 	
 	for(var key in obj) {
-		row.schema.push(key);
-		row.data.push(obj[key]);
+		if(typeof obj[key] !== 'undefined') {
+			row.schema.push(key);
+			row.data.push(obj[key]);			
+		}
 	}
-	
 	return row;
 }
 

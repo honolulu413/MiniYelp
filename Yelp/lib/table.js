@@ -7,9 +7,15 @@ var Table = function() {};
 Table.prototype.checkLegalData = function(row) {
 	for(var i = 0; i < row.schema.length; i++) {
 		var columnName = row.schema[i];
-		var type = this.getType(columnName).toLowerCase();
 		
-		if (typeof type === 'undefined' || type === 'string') {
+		var type = this.getType(columnName);
+		// if there is no type info, treat it as 'string'
+		if (typeof type === 'undefined') {
+			type = "string";
+		}
+		type = type.toLowerCase();
+		
+		if (type === 'string') {
 			if (!/^[-0-9a-zA-Z_]*$/.test(row.data[i])) {
 				console.log("some string contains non-letter!");
 				return false;

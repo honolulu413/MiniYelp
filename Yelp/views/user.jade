@@ -10,4 +10,22 @@ block content
     - for (var key in user)
       td #{key}  #{user[key]}
       td &nbsp;
+  br
+  h3
+  |  Search Business:
+  br
+  form(method='get', action='/business_list')
+    label() Business Name: 
+    br
+    input(type='text', name='name', value='')
+    br
+    label() City: 
+    br
+    input(type='text', name='city', value='')
+    br
+    label() State: 
+    br
+    input(type='text', name='state', value='')
+    br
+    input(type='submit', value='Search')
   // Put a click button that lets us return to the index page 

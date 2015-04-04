@@ -20,9 +20,6 @@ var express = require('express')
   , businesses = require('./routes/business')
 ;
 
-console.log("hello");
-console.log("hello");
-
 // Initialize express
 var app = express();
 // .. and our app
@@ -35,6 +32,7 @@ app.post('/register', register.post);
 app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
+app.post('/login', login.post);
 
 
 // Listen on the port we specify

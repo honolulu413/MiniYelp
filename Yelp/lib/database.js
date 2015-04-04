@@ -51,7 +51,6 @@ function insert(table, row, handleResults) {
 // the result is like:
 // SELECT * FROM some_table WHERE id = '1a' AND name = 'foo';
 function select(table, row, handleResults) {
-	
 	// remove empty data
 	var newRow = {
 			schema : [],
@@ -111,6 +110,7 @@ function exist(table, row, handleResults) {
 //if the primary key part of row exist, call handleResults().
 //else, do nothing.
 function allExist(table, row, handleResults) {	
+	console.log("row is: " + row);
 	if (table.checkLegalData(row) && table.checkPrimaryKey(row)) {
 		var project = require('./table').project;		
 		select(table, row, function(err, results) {

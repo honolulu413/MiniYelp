@@ -3,7 +3,6 @@ var BUSINESSES = require('../lib/table').BUSINESSES;
 var object2Row = require('../lib/row').object2Row;
 var alphanumeric = require('../lib/string.js').alphanumeric;
 
-
 function get(request, respond) {
 	var url_parts = require('url').parse(request.url, true);
 	var query = url_parts.query;

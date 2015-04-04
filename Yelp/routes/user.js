@@ -3,8 +3,9 @@ var APP_USERS = require('../lib/table').APP_USERS;
 var alphanumeric = require('../lib/string.js').alphanumeric;
 
 function get(request, respond) {
-	var userName = /\w+/.exec(request.params);
-	
+//	var userName = /\w+/.exec(request.params);
+	var userName = /^\/([^/]+)/.exec(request.params[0])[1];
+
 	if (alphanumeric(userName)) {
 		database.select(APP_USERS,
 				{schema : APP_USERS.primaryKey,

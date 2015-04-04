@@ -24,24 +24,6 @@ function get(request, respond) {
 		}
 	});
 	
-	console.log(query);
-	
-//	var userName = /\w+/.exec(request.params);
-//	
-//	if (alphanumeric(userName)) {
-//		database.select(APP_USERS,
-//				{schema : APP_USERS.primaryKey,
-//				data : [userName]},
-//				function(err, results) {
-//					if (err === null) {
-//						console.log(results);
-//						respond.render('user.jade', {
-//							title : userName,
-//							user : results[0]
-//						});
-//					}
-//				});
-//	}
 }
 
 exports.get = get;

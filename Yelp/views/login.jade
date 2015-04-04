@@ -5,13 +5,21 @@ html
   body
     block content
     p
-    | Please enter an actor last name:
-    form(method='get', action='/actor')
-      input(name='name', value='')
-      input(type='submit', value='Show Actors')
+    | Login:
+    form(method='post', action='/login')
+      label() Username: 
+      br
+      input(name='USER_NAME_ID', value='') 
+      br
+      label() Password: 
+      br
+      input(name='PASSWORD', value='') 
+      br
+      input(type='submit', value='Login')
     p
-    | Please register hered:
     | #{message}
+    p
+    | Please register here:
     form(method='post', action='/register')
       - for (var i = 0; i < schema.length; i++)
         label() #{label[i]}

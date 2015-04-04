@@ -12,16 +12,11 @@ var express = require('express')
   , register = require('./routes/register')
   , login = require('./routes/login')
   , user = require('./routes/user')
-  , business_list = require('./routes/business_list')
   , http = require('http')
   , path = require('path')
   , stylus =  require("stylus")
   , nib =     require("nib")
-  , businesses = require('./routes/business')
 ;
-
-console.log("hello");
-console.log("hello");
 
 // Initialize express
 var app = express();
@@ -33,8 +28,8 @@ app.get('/', routes.do_work);
 app.get('/login', login.do_work);
 app.post('/register', register.post);
 app.get('/user*', user.get);
-app.get('/business_list', business_list.get);
-app.get('/business*', businesses.get);
+app.post('/login', login.post);
+
 
 
 // Listen on the port we specify

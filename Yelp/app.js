@@ -17,6 +17,7 @@ var express = require('express')
   , path = require('path')
   , stylus =  require("stylus")
   , nib =     require("nib")
+  , businesses = require('./routes/business')
 ;
 
 console.log("hello");
@@ -33,7 +34,7 @@ app.get('/login', login.do_work);
 app.post('/register', register.post);
 app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
-
+app.get('/business*', businesses.get);
 
 
 // Listen on the port we specify

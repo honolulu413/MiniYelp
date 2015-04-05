@@ -45,6 +45,7 @@ function executeBatch(sqlBatch, handleResultsBatch) {
 		  handleCompletedCount++;
 	  	if (err === null) {
 	  	  resultsArray[MyTaskIndex] = results;
+	  	  // if handle has collected all the results
 	  	  if (handleCompletedCount === totalTaskNum) {
 	  		// if there is no err, set errArray to null (instead of empty array)
 	  		var errNullCount = 0;

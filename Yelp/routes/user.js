@@ -1,9 +1,10 @@
 var database = require('../lib/database');
 var APP_USERS = require('../lib/table').APP_USERS;
 var alphanumeric = require('../lib/string.js').alphanumeric;
+var getPath = require('../lib/string').getPath;
 
 function get(request, respond) {
-	var userName = /\w+/.exec(request.params);
+	var userName = getPath(request.params[0]);
 	
 	if (alphanumeric(userName)) {
 		database.select(APP_USERS,

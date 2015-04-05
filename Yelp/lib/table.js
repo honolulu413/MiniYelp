@@ -130,8 +130,18 @@ BUSINESSES.schema = ["BUSINESS_ID", "NAME", "FULL_ADDRESS", "CITY", "STATE", "LA
 BUSINESSES.type = ["string", "string", "string", "string", "string", "int", "int", "int", "int"];
 BUSINESSES.label = ["business ID", "name", "address", "city", "state", "latitude", "longitude", "star", "review count"];
 
+// REVIEWS
+var REVIEWS = new Table();
+
+REVIEWS.name = "REVIEWS";
+REVIEWS.primaryKey = ["BUSINESS_ID", "USER_ID"];
+REVIEWS.schema = ["BUSINESS_ID", "USER_ID", "STAR", "REVIEW_TEXT", "REVIEW_DATE", "USEFUL_VOTE_NUMBER"];
+REVIEWS.type = ["string", "string", "int", "string", "string", "int"];
+REVIEWS.label = ["business ID", "name", "address", "city", "state", "latitude", "longitude", "star", "review count"];
+
 exports.APP_USERS = APP_USERS;
 exports.BUSINESSES = BUSINESSES;
+exports.REVIEWS = REVIEWS;
 exports.project = project;
 
 

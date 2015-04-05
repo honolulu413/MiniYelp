@@ -91,7 +91,6 @@ function insert(table, row, handleResults) {
 // the result is like:
 // SELECT * FROM some_table WHERE id = '1a' AND name = 'foo';
 function select(table, row, handleResults) {
-	
 	// remove empty data
 	var newRow = {
 			schema : [],
@@ -148,6 +147,28 @@ function exist(table, row, handleResults) {
 	}
 }
 
+//if the primary key part of row exist, call handleResults().
+//else, do nothing.
+function allExist(table, row, handleResults) {	
+	console.log("row is: " + row);
+	if (table.checkLegalData(row) && table.checkPrimaryKey(row)) {
+		var project = require('./table').project;		
+		select(table, row, function(err, results) {
+			if (err !== null) {
+				handleResults(err, null);
+			} else {
+				if (results.length > 0) {
+					handleResults(null, true);
+				} else {
+					handleResults(null, false);
+				}				
+			}
+		});
+	} else {
+		handleResults("invalid row", null);
+	}
+}
+
 //add quote for strings. won't export
 function adjustTypeFormat(table, row) {
 	var newRow = {
@@ -188,6 +209,7 @@ exports.executeBatch = executeBatch;
 exports.insert = insert;
 exports.select = select;
 exports.exist = exist;
+exports.allExist = allExist;
 
 
 

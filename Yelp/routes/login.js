@@ -12,15 +12,11 @@ var requestQueryParser = require('../lib/requestQueryParser');
 var getData = require('../lib/row.js').getData;
 
 function post(request, response) {
-	
-	console.log("login post");
 	var row = requestQueryParser.parse(request, ["USER_NAME_ID", "PASSWORD"]);
 	var exists;
-	database.exist(APP_USERS, row, function(err, bool) {
+	database.allExist(APP_USERS, row, function(err, bool) {
 		if (err === null) {
-			console.log(bool);
 			if (bool) {
-				console.log("log success");
 				// successfully registered. redirect to homepage
 				response.writeHead(302, {
 					  'Location': '/user/' + getData(row, 'USER_NAME_ID')

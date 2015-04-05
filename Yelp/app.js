@@ -12,11 +12,11 @@ var express = require('express')
   , register = require('./routes/register')
   , login = require('./routes/login')
   , user = require('./routes/user')
-  , business_list = require('./routes/business_list')
   , http = require('http')
   , path = require('path')
   , stylus =  require("stylus")
   , nib =     require("nib")
+  , business_list = require('./routes/business_list')
   , businesses = require('./routes/business')
 ;
 
@@ -33,7 +33,6 @@ app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
 app.post('/login', login.post);
-
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function(){

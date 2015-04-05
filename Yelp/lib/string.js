@@ -6,7 +6,12 @@ function alphanumeric(str) {
 }
 
 function getPath(path) {
-	return /^\/([^\/]+)/.exec(path)[1];
+	var result = /^\/([^\/]+)/.exec(path);
+	if (typeof result !== 'undefined' && result !== null && result.length > 0) {
+		return result[1];
+	} else {
+		return "";
+	}
 }
 
 exports.alphanumeric = alphanumeric;

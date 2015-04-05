@@ -31,6 +31,46 @@ function execute(sql, handleResults) {
   }); // end oracle.connect
 }
 
+function executeBatch(sqlBatch, handleResultsBatch) {
+  console.log("about to execute sql:" + sqlBatch);
+  var resultsArray = [];
+  var errArray = [];
+  var totalTaskNum = sqlBatch.length;
+  var handleCompletedCount = 0;
+  
+  function handleGenerator(taskIndex) {
+	var MyTaskIndex = taskIndex;
+	// return handleResults function
+	  return function (err, results) {
+		  handleCompletedCount++;
+	  	if (err === null) {
+	  	  resultsArray[MyTaskIndex] = results;
+	  	  if (handleCompletedCount === totalTaskNum) {
+	  		// if there is no err, set errArray to null (instead of empty array)
+	  		var errNullCount = 0;
+	  		for(var j = 0; j < sqlBatch.length; j++) {
+	  			if(typeof errArray[j] === 'undefined') {
+	  				errNullCount++;
+	  			}
+	  		}
+	  		if (errNullCount === sqlBatch.length) {
+	  			errArray = null;
+	  		}
+	  		// execute handler
+	  	  	handleResultsBatch(errArray, resultsArray);
+	  	  }
+	  	} else {
+	  		errArray[index] = err;
+	  	}
+	  }
+  }
+  
+  for(var i = 0; i < sqlBatch.length; i++) {
+  	execute(sqlBatch[i], handleGenerator(i));
+  }
+
+}
+
 function insert(table, row, handleResults) {
 	if (table.checkLegalData(row) && table.checkPrimaryKey(row) && table.checkNotNull(row)) {
 		var rowFormatted = adjustTypeFormat(table, row);
@@ -165,6 +205,7 @@ function adjustTypeFormat(table, row) {
 
 
 exports.execute = execute;
+exports.executeBatch = executeBatch;
 exports.insert = insert;
 exports.select = select;
 exports.exist = exist;

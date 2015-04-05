@@ -19,7 +19,8 @@ function get(request, respond) {
 		if(err === null) {
 			respond.render('business_list.jade', {
 				title : BUSINESSES.name,
-				business_list : results.slice(0, 10)
+				business_list : results.slice(0, 10),
+				detalLink : null
 			});
 		}
 	});

@@ -1,11 +1,12 @@
-doctype html
-html
-  head
-    title= title
-  body
-    block content
+// Basic Jade specification for querying for an actor
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /actor once
+// the user hits Submit
+block content
     p
     | Login:
+    
     form(method='post', action='/login')
       label() Username: 
       br

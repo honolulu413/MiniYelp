@@ -27,6 +27,8 @@ function post (request, respond) {
 					if (err === null) {
 						console.log("register succeed");
 						// successfully registered. redirect to homepage
+						request.session.username = getData(rowPost, "USER_NAME_ID");
+
 						respond.writeHead(302, {
 							  'Location': '/user/' + getData(rowPost, 'USER_NAME_ID')
 						});

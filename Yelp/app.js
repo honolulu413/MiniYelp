@@ -18,7 +18,9 @@ var express = require('express')
   , nib =     require("nib")
   , business_list = require('./routes/business_list')
   , businesses = require('./routes/business')
-;
+  , logout = require('./routes/logout')
+ ;
+var session = require('express-session');
 
 // Initialize express
 var app = express();
@@ -33,6 +35,7 @@ app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
 app.post('/login', login.post);
+app.get('/logout', logout.get);
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function(){
@@ -51,6 +54,10 @@ function compile(str, path) {
 // This is app initialization code
 function init_app() {
 	// all environments
+	app.use( express.cookieParser() );
+
+	app.use(express.session({secret: '1234567890ASECRETTOKEN'}));
+	
 	app.set('port', process.env.PORT || 8080);
 	
 	// Use Jade to do views

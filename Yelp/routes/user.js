@@ -1,15 +1,11 @@
 var database = require('../lib/database');
 var APP_USERS = require('../lib/table').APP_USERS;
 var alphanumeric = require('../lib/string.js').alphanumeric;
+var getPath = require('../lib/string').getPath;
 
 function get(request, respond) {
-	console.log(/^\/([^\/]+)/.exec(request.params[0]));
-	var userName = /^\/([^\/]+)/.exec(request.params[0])[1];
+	var userName = getPath(request.params[0]);
 
-	console.log(userName);
-//	console.log(request.session.username);
-//	console.log(userName);
-//	console.log(request.session.username === userName);
 	if (request.session.username === userName) {
 		if (alphanumeric(userName)) {
 			database.select(APP_USERS, {
@@ -28,7 +24,6 @@ function get(request, respond) {
 	} else {
 		respond.redirect('/login');
 	}
-
 }
 
 exports.get = get;

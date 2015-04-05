@@ -14,6 +14,13 @@ exports.do_work = function(req, res){
 //	var x = APP_USERS.checkLegalData(row);
 //	console.log(x);
 	
+	var sqlArray = ['SELECT COUNT(*) FROM APP_USERS',
+	                'SELECT COUNT(*) FROM BUSINESSES'];
+	database.executeBatch(sqlArray, function(errArray, resultsArray) {
+		console.log(errArray);
+		console.log(resultsArray);
+	});
+	
 	res.render('index.jade', { 
 	  title: 'HW3' 
   });

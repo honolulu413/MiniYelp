@@ -17,7 +17,14 @@ function post(request, response) {
 	database.allExist(APP_USERS, row, function(err, bool) {
 		if (err === null) {
 			if (bool) {
-				// successfully registered. redirect to homepage
+				// successfully log in. redirect to homepage
+//				var indexInRow = row.schema.indexOf("USER_NAME_ID");
+//				
+//				
+//			  	request.session.username = row.data[indexInRow];
+				request.session.username = getData(row, "USER_NAME_ID");
+//			  	console.log("ddd "+ request.session.username);
+			  	console.log(request.session.username);
 				response.writeHead(302, {
 					  'Location': '/user/' + getData(row, 'USER_NAME_ID')
 				});

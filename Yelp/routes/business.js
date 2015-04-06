@@ -1,6 +1,6 @@
 var database = require('../lib/database');
 var BUSINESSES = require('../lib/table').BUSINESSES;
-
+var getPath = require('../lib/string').getPath;
 
 //function get(request, respond) {
 //	var businessID = /^\/([^\/]+)/.exec(request.params[0])[1];
@@ -22,8 +22,9 @@ var BUSINESSES = require('../lib/table').BUSINESSES;
 //}
 
 function get(request, respond) {
-	var businessID = /^\/([^\/]+)/.exec(request.params[0])[1];
-		database.select(BUSINESSES,
+ 	var businessID = getPath(request.params[0]);
+	
+ 		database.select(BUSINESSES,
 				{schema : BUSINESSES.primaryKey,
 				data : [businessID]},
 				function(err, results) {

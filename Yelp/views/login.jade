@@ -1,23 +1,20 @@
-doctype html
-html
-  head
-    title= title
-  body
-    block content
-    p
-    | Login:
-    form(method='post', action='/login')
-      label() Username: 
-      br
-      input(name='USER_NAME_ID', value='') 
-      br
-      label() Password: 
-      br
-      input(name='PASSWORD', value='') 
-      br
-      input(type='submit', value='Login')
+// Basic Jade specification for querying for an actor
+// Inherits from layout 
+extend layout
+// Then we produce a form that triggers /actor once
+// the user hits Submit
+block content
     p
     | #{message}
+    
+    div.top
+      form.form-horizontal(method="post", id="loginForm")
+        label Username
+        input.span3(name="USER_NAME_ID", placeholder="Enter your username")
+        label Password
+        input.span3(name="PASSWORD")
+        input.btn(type="submit", value="Log In")
+   
     p
     | Please register here:
     form(method='post', action='/register')

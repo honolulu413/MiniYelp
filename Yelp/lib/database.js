@@ -61,7 +61,7 @@ function executeBatch(sqlBatch, handleResultsBatch) {
 	  	  	handleResultsBatch(errArray, resultsArray);
 	  	  }
 	  	} else {
-	  		errArray[index] = err;
+	  		errArray[MyTaskIndex] = err;
 	  	}
 	  }
   }

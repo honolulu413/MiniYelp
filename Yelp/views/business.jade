@@ -8,5 +8,32 @@ block content
     - for (var key in business)
         tr
           td #{key} :  #{business[key]}
-          
-          
+  
+      
+  br	
+  | Top Negative Reviews:
+  br                       
+  - for (var i = 0; i < badReview.length; i++)
+    // Create a table with one row per result
+    table
+      tr REVIEW_DATE:  #{badReview[i]["REVIEW_DATE"]}
+      br
+      tr REVIEW_TEXT:  #{badReview[i]["REVIEW_TEXT"]}
+      br
+      tr STAR:  #{badReview[i]["STAR"]}
+      br
+      br
+      
+  br	
+  | Top Positive Reviews:
+  br                       
+  - for (var i = 0; i < goodRievew.length; i++)
+    // Create a table with one row per result
+    table
+      tr REVIEW_DATE:  #{goodRievew[i]["REVIEW_DATE"]}
+      br
+      tr REVIEW_TEXT:  #{goodRievew[i]["REVIEW_TEXT"]}
+      br
+      tr STAR:  #{goodRievew[i]["STAR"]}
+      br
+      br

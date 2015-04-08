@@ -3,12 +3,21 @@
 extend layout
 block content
   p
+    | Current user: #{userName}
+    br
+  
     | Information about #{title}:  
   table
     - for (var key in business)
         tr
           td #{key} :  #{business[key]}
   
+  
+  | Add to my favorite:
+  form(method='post', action='/favorite')
+    input(type='hidden', name='BUSINESS_ID', value='#{business["BUSINESS_ID"]}') 
+    input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
+    input(type='submit', value='Add to my favorites') 
       
   br	
   | Top Negative Reviews:

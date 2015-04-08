@@ -19,6 +19,7 @@ var express = require('express')
   , business_list = require('./routes/business_list')
   , businesses = require('./routes/business')
   , logout = require('./routes/logout')
+  ,	favorite = require('./routes/favorite')
  ;
 var session = require('express-session');
 
@@ -36,6 +37,8 @@ app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
 app.post('/login', login.post);
 app.get('/logout', logout.get);
+app.post('/favorite', favorite.post);
+app.get('/favorite', favorite.get);
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function(){

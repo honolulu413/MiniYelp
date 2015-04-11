@@ -15,7 +15,7 @@ function get(request, respond) {
 	
 	if (!alphanumeric(userName)) {
 		respond.redirect('/login');
-		return
+		return;
 	}
 	
 	if (request.session.username === userName) {
@@ -62,6 +62,13 @@ function get(request, respond) {
 		});
 			
  	} else {
+ 		// not current user
+		var currentUserID = request.session.username;
+		var strangerID = getPath(request.params[0]);
+		
+		var rowFriendRelation = {schema : APP_USER_FRIENDS.primaryKey,
+									data : [ currentUserID, strangerID]};
+		
  		var object2Row = require('../lib/row').object2Row;
  		
 		database.select(APP_USERS, {

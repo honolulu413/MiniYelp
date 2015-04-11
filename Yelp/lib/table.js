@@ -36,6 +36,10 @@ Table.prototype.checkLegalData = function(row) {
 
 // primary key constraint
 Table.prototype.checkPrimaryKey = function(row) {
+	if (this.primaryKey === undefined) {
+		return true;
+	}
+	
 	for ( var i = 0; i < this.primaryKey.length; i++) {
 		var columnName = this.primaryKey[i];
 		var indexInRow = row.schema.indexOf(columnName);
@@ -56,6 +60,10 @@ Table.prototype.checkPrimaryKey = function(row) {
 
 // not null constraint
 Table.prototype.checkNotNull = function(row) {
+	if (this.notNull === undefined) {
+		return true;
+	}
+	
 	for ( var i = 0; i < this.notNull.length; i++) {
 		var columnName = this.notNull[i];
 		var indexInRow = row.schema.indexOf(columnName);
@@ -79,7 +87,11 @@ Table.prototype.rowExist = function(row, handleResults) {
 };
 
 Table.prototype.getType = function(columnName) {
-	return this.type[this.schema.indexOf(columnName)];
+	if (typeof this.type !== 'undefined')
+		return this.type[this.schema.indexOf(columnName)];
+	else {
+		return undefined;
+	}
 };
 
 Table.prototype.getLabel = function(columnName) {
@@ -147,7 +159,7 @@ FAVORITES.type = [ "string", "string" ];
 FAVORITES.label = [ "business ID", "name"];
 FAVORITES.notNull = [ "BUSINESS_ID", "USER_NAME_ID" ];
 
-// REVIEWS
+//REVIEWS
 var REVIEWS = new Table();
 
 REVIEWS.name = "REVIEWS";
@@ -156,9 +168,17 @@ REVIEWS.schema = ["BUSINESS_ID", "USER_ID", "STAR", "REVIEW_TEXT", "REVIEW_DATE"
 REVIEWS.type = ["string", "string", "int", "string", "string", "int"];
 REVIEWS.label = ["business ID", "name", "address", "city", "state", "latitude", "longitude", "star", "review count"];
 
+// APP_USER_FRIENDS
+var APP_USER_FRIENDS = new Table();
+
+APP_USER_FRIENDS.name = "APP_USER_FRIENDS";
+APP_USER_FRIENDS.primaryKey = ["USER_NAME_ID1", "USER_NAME_ID2"];
+APP_USER_FRIENDS.schema = ["USER_NAME_ID1", "USER_NAME_ID2"];
+
 exports.APP_USERS = APP_USERS;
 exports.BUSINESSES = BUSINESSES;
 exports.FAVORITES = FAVORITES;
-
+exports.APP_USER_FRIENDS = APP_USER_FRIENDS;
 exports.REVIEWS = REVIEWS;
+
 exports.project = project;

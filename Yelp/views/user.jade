@@ -26,7 +26,7 @@ block content
     | Friends:
     form(method='post', action='/invite')
       - for (var i = 0; i < friends_list.length; i++)
-        #{friends_list[i].FIRST_NAME} &nbsp #{friends_list[i].LAST_NAME} &nbsp
+        | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
         a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
         input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
         br

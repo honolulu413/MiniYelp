@@ -18,18 +18,7 @@ exports.post = function(req, res){
 
 	console.log("invite name is " + req.param('friends_list'));
 
-	
-	
-	
-	
-	
-//	database.insert(FAVORITES, row, function(err, results) {
-//		if (err === null) {
-//			console.log("add to favorite succeed");	
-//			res.redirect('/user/' + userName);
-//
-//		}
-//	});
+	res.redirect('/user/' + userName);
 
 };
 

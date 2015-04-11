@@ -30,6 +30,8 @@ function get(request, respond) {
 	var businessCity;
 	var businessState;
 
+ 	console.log(businessID);
+ 	
 	if (currentUser) {
 		database.select(BUSINESSES, {
 			schema : BUSINESSES.primaryKey,

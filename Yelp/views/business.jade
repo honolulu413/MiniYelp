@@ -1,6 +1,6 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
-extend layout
+extend layout1
 block content
   p
     | Current user: #{userName}
@@ -17,7 +17,7 @@ block content
   
   br
   form(method='post', action='/favorite')
-    input(type='hidden', name='BUSINESS_ID', value='#{business["BUSINESS_ID"]}') 
+    input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 
     input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
     input(type='submit', value='Add to my favorites') 
        
@@ -60,3 +60,4 @@ block content
         br
     a(href='/business/' + similarBusinesses[i]["BUSINESS_ID"]) details
     br
+

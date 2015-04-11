@@ -9,8 +9,9 @@ exports.post = function(req, res){
 	var userIDs = req.param('friends_list');
 	var num = userIDs.length;
 	for (var i = 0; i < userIDs.length; i++) {
-		var query = "SELECT BUSINESS_ID FROM FAVORITES WHERE " +
-				"USER_NAME_ID = " + "'" +  userIDs[i] + "'";
+		var query = "SELECT * FROM BUSINESSES WHERE BUSINESS_ID IN " +
+				"( SELECT BUSINESS_ID FROM FAVORITES WHERE USER_NAME_ID" +
+				" = " + "'" +  userIDs[i] + "'" + ")"
 		batch.push(query);
 	}
 	
@@ -18,9 +19,12 @@ exports.post = function(req, res){
 		if (err === null) {
 			console.log(results);
 			var rank = {};
-			for (var result in results) {
-				for (var business in result) {
+			for (var i in results) {
+				var result = results[i];
+				for (var j in result) {
+					var business = result[j];
 					var businessID = business["BUSINESS_ID"];
+					console.log('businessID is: ' + businessID );
 					if (typeof rank[businessID] !== 'undefined') {
 						rank[businessID]['number'] += 1;
 					} else {
@@ -31,25 +35,21 @@ exports.post = function(req, res){
 					}
 				}
 			}
-			console.log("rank");
-			console.log(rank);
-			var rankedArray = $.map(rank, function(value, index) {
-			    return [value];
-			});
 			
+			var rankedArray = Object.keys(rank).map(function (key) {return rank[key]});
 			var sorted = rankedArray.slice().sort(function(a, b){return b.number-a.number});
-			console.log("sorted");
-			console.log(sorted);
 			
-			var finalResult = [];
-			for (var entry in sorted) {
-				var business = entry['business'];
-				finalResult.push(business);
+			var sortedBusiness = [];
+			for (var i in sorted) {
+				var business = sorted[i]['business'];
+				sortedBusiness.push(business);
 			}
-			
+			console.log(sortedBusiness);
 			res.render('invite.jade', {	
-				'business_list': finalResult
+				'business_list': sortedBusiness
 			});
+			
+			
 			
 //			console.log(results[0]);
 //			console.log(results[1]);
@@ -64,10 +64,6 @@ exports.post = function(req, res){
 //	console.log("value2 is " + values2);
 //	console.log("value3 is " + values3);
 
-
-	console.log("invite name is " + req.param('friends_list'));
-
-	res.redirect('/user/' + userName);
 
 };
 

@@ -48,3 +48,16 @@ block content
       tr STAR:  #{badReview[i]["STAR"]}
       br
       br
+  p
+    | You may also like:
+  - for (var i = 0; i < similarBusinesses.length; i++)
+    // Create a table with one row per result
+    table
+      tr
+      - for (var key in similarBusinesses[i])
+        td #{key}  #{similarBusinesses[i][key]}
+        td &nbsp;
+        br
+    a(href='/business/' + similarBusinesses[i]["BUSINESS_ID"]) details
+    br
+

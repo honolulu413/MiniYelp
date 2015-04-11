@@ -23,6 +23,12 @@ function post(request, response) {
 //				
 //			  	request.session.username = row.data[indexInRow];
 				request.session.username = getData(row, "USER_NAME_ID");
+
+				console.log('----------------+++++++++++');
+				console.log(request);
+				console.log(request.session);
+				console.log('----------------+++++++++++--------');
+
 //			  	console.log("ddd "+ request.session.username);
 			  	console.log(request.session.username);
 				response.writeHead(302, {

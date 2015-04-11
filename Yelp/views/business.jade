@@ -17,7 +17,7 @@ block content
   
   br
   form(method='post', action='/favorite')
-    input(type='hidden', name='BUSINESS_ID', value='#{business["BUSINESS_ID"]}') 
+    input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 
     input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
     input(type='submit', value='Add to my favorites') 
        

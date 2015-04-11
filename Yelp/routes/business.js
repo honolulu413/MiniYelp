@@ -27,6 +27,8 @@ function get(request, respond) {
 	var businessInfo;
  	var currentUser = request.session.username;
 
+ 	console.log(businessID);
+ 	
 	if (currentUser) {
 //		database.select(BUSINESSES, {
 //			schema : BUSINESSES.primaryKey,
@@ -64,8 +66,6 @@ function get(request, respond) {
 					badReview : results[2],
 					userName: currentUser
 				});
-				console.log(results[0]);
-				console.log(results[1]);
 
 
 			}

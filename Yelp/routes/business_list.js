@@ -15,7 +15,7 @@ function get(request, respond) {
 		return;
 	}
 		
-	database.select(BUSINESSES, rowQuery, function(err, results) {
+	database.lowerSelect(BUSINESSES, rowQuery, function(err, results) {
 		if(err === null) {
 			respond.render('business_list.jade', {
 				title : BUSINESSES.name,

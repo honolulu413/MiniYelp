@@ -124,6 +124,39 @@ function select(table, row, handleResults) {
 	}
 }
 
+function lowerSelect(table, row, handleResults) {
+	// remove empty data
+	var newRow = {
+			schema : [],
+			data : []
+	};
+	
+	for(var i = 0; i < row.schema.length; i++) {
+		if(row.data[i] !== null && row.data[i] !== "") {
+			newRow.schema.push(row.schema[i]);
+			newRow.data.push(row.data[i].toLowerCase());
+		}
+	}
+
+//	if (table.checkLegalData(newRow) && table.checkPrimaryKey(newRow)) {
+	if (table.checkLegalData(newRow)) {
+		// generate WHERE clause
+		var rowFormatted = adjustTypeFormat(table, newRow);
+		var where_clause = [];
+		for(var i = 0; i < rowFormatted.schema.length; i++) {
+			where_clause.push("lower(" + rowFormatted.schema[i] + ") = " + rowFormatted.data[i]);
+		}
+		// array -> where clause
+		where_clause = " WHERE " + where_clause.join(" AND ");
+
+		var sql = "SELECT " + "*" +
+			" FROM " + table.name + where_clause;
+		execute(sql, handleResults);
+	} else {
+		handleResults("invalid row", null);
+	}
+}
+
 // if the primary key part of row exist, call handleResults().
 // else, do nothing.
 function exist(table, row, handleResults) {	
@@ -211,6 +244,8 @@ exports.insert = insert;
 exports.select = select;
 exports.exist = exist;
 exports.allExist = allExist;
+exports.lowerSelect = lowerSelect;
+
 
 
 

@@ -11,6 +11,15 @@ block content
       td #{key}  #{current_user[key]}
       td &nbsp;
    
+  br
+  //invite to party
+  form(method='post', action='/invite')
+    input(type='hidden', name='current_user', value='#{current_user}') 
+    input(type='checkbox', name='friends_list', value='1') 
+    input(type='checkbox', name='friends_list', value='2') 
+    input(type='checkbox', name='friends_list', value='3') 
+    input(type='submit', value='Invite friends to party!')   
+   
   br   
   //Similar User
   p

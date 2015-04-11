@@ -20,6 +20,7 @@ var express = require('express')
   , businesses = require('./routes/business')
   , logout = require('./routes/logout')
   ,	favorite = require('./routes/favorite')
+  , add_friend = require('./routes/add_friend')
  ;
 var session = require('express-session');
 
@@ -31,14 +32,16 @@ init_app(app);
 // When we get a request for {app}/ we should call routes/index.js
 app.get('/', routes.do_work);
 app.get('/login', login.do_work);
-app.post('/register', register.post);
 app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
-app.post('/login', login.post);
 app.get('/logout', logout.get);
-app.post('/favorite', favorite.post);
 app.get('/favorite', favorite.get);
+
+app.post('/register', register.post);
+app.post('/login', login.post);
+app.post('/favorite', favorite.post);
+app.post('/user/add_friend', add_friend.post);
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function(){

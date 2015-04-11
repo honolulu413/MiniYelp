@@ -3,6 +3,7 @@ var APP_USERS = require('../lib/table').APP_USERS;
 var alphanumeric = require('../lib/string.js').alphanumeric;
 var getPath = require('../lib/string').getPath;
 var project = require('../lib/table').project;
+var getData = require('../lib/row').getData;
 
 function get(request, respond) {
 	var userName = getPath(request.params[0]);
@@ -68,14 +69,14 @@ function get(request, respond) {
 			data : [ userName ]
 		}, function(err, results) {
 			if (err === null) {
-				console.log(results[0]);
-				console.log(object2Row(results[0]));
-				console.log(project(object2Row(results[0]), ['USER_NAME_ID', 'FIRST_NAME', 'LAST_NAME', 'LOCATION_CITY', 'LOCATION_STATE']));
+				current_user_id = request.session.username;
 				
 				user_info = project(object2Row(results[0]), ['USER_NAME_ID', 'FIRST_NAME', 'LAST_NAME', 'LOCATION_CITY', 'LOCATION_STATE']);
 				
 				respond.render('stranger.jade', {
-					user_info : user_info
+					user_info : user_info,
+					current_user_id : current_user_id,
+					stranger_id : getData(user_info, "USER_NAME_ID")
 				});
 			}
 

@@ -5,19 +5,35 @@ block content
   p
     | Current user: #{userName}
     br
+    br
   
-    | Information about #{title}:  
-  table
-    - for (var key in business)
-        tr
-          td #{key} :  #{business[key]}
+    | Information about this business:  
+  - for (var i = 0; i < business.length; i++)
+    // Create a table with one row per result
+    table
+      - for (var key in business[i])
+          tr
+            td #{key} :  #{business[i][key]}  
   
-  
-  | Add to my favorite:
+  br
   form(method='post', action='/favorite')
     input(type='hidden', name='BUSINESS_ID', value='#{business["BUSINESS_ID"]}') 
     input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
     input(type='submit', value='Add to my favorites') 
+       
+  br	
+  | Top Positive Reviews:
+  br                       
+  - for (var i = 0; i < goodRievew.length; i++)
+    // Create a table with one row per result
+    table
+      tr REVIEW_DATE:  #{goodRievew[i]["REVIEW_DATE"]}
+      br
+      tr REVIEW_TEXT:  #{goodRievew[i]["REVIEW_TEXT"]}
+      br
+      tr STAR:  #{goodRievew[i]["STAR"]}
+      br
+      br
       
   br	
   | Top Negative Reviews:
@@ -32,17 +48,15 @@ block content
       tr STAR:  #{badReview[i]["STAR"]}
       br
       br
-      
-  br	
-  | Top Positive Reviews:
-  br                       
-  - for (var i = 0; i < goodRievew.length; i++)
+  p
+    | You may also like:
+  - for (var i = 0; i < similarBusinesses.length; i++)
     // Create a table with one row per result
     table
-      tr REVIEW_DATE:  #{goodRievew[i]["REVIEW_DATE"]}
-      br
-      tr REVIEW_TEXT:  #{goodRievew[i]["REVIEW_TEXT"]}
-      br
-      tr STAR:  #{goodRievew[i]["STAR"]}
-      br
-      br
+      tr
+      - for (var key in similarBusinesses[i])
+        td #{key}  #{similarBusinesses[i][key]}
+        td &nbsp;
+        br
+    a(href='/business/' + similarBusinesses[i]["BUSINESS_ID"]) details
+    br

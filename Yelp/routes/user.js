@@ -11,11 +11,10 @@ function get(request, respond) {
 	var currentUser;
 
 	if (!alphanumeric(userName)) {
-
 		respond.redirect('/login');
-		return
-
+		return;
 	}
+	
 	if (request.session.username === userName) {
 		database
 				.select(
@@ -72,29 +71,67 @@ function get(request, respond) {
 
 							}
 						});
+ 	} else {
+ 		// not current user
+		var currentUserID = request.session.username;
+		var strangerID = getPath(request.params[0]);
+		
+		var isFriend = require("../lib/table_query").isFriend;
+		
+		isFriend(currentUserID, strangerID, function(err, results) {
+			if (err !== null) {
+				console.log("unknown error!");
+				return;
+			} 
 
-	} else {
-		var object2Row = require('../lib/row').object2Row;
+			var favoriteBusinessSQL = "SELECT * FROM BUSINESSES WHERE BUSINESSES.BUSINESS_ID IN "
+				+ "( SELECT BUSINESS_ID FROM FAVORITES WHERE USER_NAME_ID = "
+				+ "'" + strangerID + "')";
+			var userInfoSQL = "SELECT FIRST_NAME, LAST_NAME, LOCATION_CITY, LOCATION_STATE FROM APP_USERS WHERE USER_NAME_ID = '" + strangerID + "'";
 
-		database.select(APP_USERS, {
-			schema : APP_USERS.primaryKey,
-			data : [ userName ]
-		}, function(err, results) {
-			if (err === null) {
-				current_user_id = request.session.username;
+			if (results === true) {
+				// is friend
+				
+				var queryBatch = [];
+				queryBatch.push(userInfoSQL);
+				queryBatch.push(favoriteBusinessSQL);
 
-				user_info = project(object2Row(results[0]), [ 'USER_NAME_ID',
-						'FIRST_NAME', 'LAST_NAME', 'LOCATION_CITY',
-						'LOCATION_STATE' ]);
-
-				respond.render('stranger.jade', {
-					user_info : user_info,
-					current_user_id : current_user_id,
-					stranger_id : getData(user_info, "USER_NAME_ID")
+				database.executeBatch(queryBatch, function(
+						errArray, resultsArray) {
+					if (errArray === null) {
+						respond.render('stranger.jade', {
+							title : currentUserID,
+							user_info : resultsArray[0][0],
+							business_list : resultsArray[1],
+							current_user_id : currentUserID,
+							stranger_id : strangerID,
+							is_friend : true
+						});
+					}
 				});
-			}
+			} else if (results === false) {
+				// is not friend
+				
+				var queryBatch = [];
+				queryBatch.push(userInfoSQL);
 
-		});
+				database.executeBatch(queryBatch, function(
+						errArray, resultsArray) {
+					if (errArray === null) {
+						respond.render('stranger.jade', {
+							title : currentUserID,
+							user_info : resultsArray[0][0],
+							business_list : null,
+							current_user_id : currentUserID,
+							stranger_id : strangerID,
+							is_friend : false
+						});
+					}
+				});				
+			}
+		})
+		
+
 	}
 }
 

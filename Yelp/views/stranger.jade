@@ -8,15 +8,25 @@ block content
   // Create a table with one row per result
   table
     tr
-    - for (var i = 0; i < user_info.schema.length; i++)
-      td #{user_info.schema[i]}  #{user_info.data[i]}
+    - for (var key in user_info)
+      td #{key}  #{user_info[key]}
       td &nbsp;
       br
-
-  form(method='post', action='/user/add_friend')
-    input(type='hidden', name='current_user_id', value='#{current_user_id}') 
-    input(type='hidden', name='stranger_id', value='#{stranger_id}') 
-    input(type='submit', value='Add friend') 
+      
+  - if (business_list !== null)
+    - for (var i = 0; i < business_list.length; i++)
+      table
+        tr
+        - for (var key in business_list[i])
+          td #{key}  #{business_list[i][key]}
+          td &nbsp;
+          br
+    
+  - if (is_friend === false)
+    form(method='post', action='/user/add_friend')
+      input(type='hidden', name='current_user_id', value='#{current_user_id}') 
+      input(type='hidden', name='stranger_id', value='#{stranger_id}') 
+      input(type='submit', value='Add friend') 
       
    
   br   

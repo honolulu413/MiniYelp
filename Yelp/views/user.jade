@@ -14,12 +14,30 @@ block content
   br
   //invite to party
   form(method='post', action='/invite')
-    input(type='hidden', name='current_user', value='#{current_user}') 
+    input(type='hidden', name='friends_list', value='#{current_user}') 
     input(type='checkbox', name='friends_list', value='1') 
     input(type='checkbox', name='friends_list', value='2') 
     input(type='checkbox', name='friends_list', value='3') 
     input(type='submit', value='Invite friends to party!')   
    
+  br
+  //Invite Friends
+  p
+    | Friends:
+    form(method='post', action='/invite')
+      - for (var i = 0; i < friends_list.length; i++)
+        | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
+        a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
+        input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
+        br
+      
+      input(type='hidden', name='friends_list', value='#{current_user["USER_NAME_ID"]}')
+      br
+      input(type='submit', value='Invite friends to party!')   
+    
+   
+   
+  br 
   br   
   //Similar User
   p

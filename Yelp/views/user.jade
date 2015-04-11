@@ -13,6 +13,35 @@ block content
   br
   form(method='get', action='/logout')
     input(type='submit', value='Logout')
+    
+  //Favorite Businesses
+  p
+    | Favorite Businesses:
+  - for (var i = 0; i < business_list.length; i++)
+    // Create a table with one row per result
+    table
+      tr
+      - for (var key in business_list[i])
+        td #{key}  #{business_list[i][key]}
+        td &nbsp;
+        br
+    a(href='/business/' + business_list[i]["BUSINESS_ID"]) details
+    br
+    
+    
+  //Friends
+  p
+    | Friends:
+  - for (var i = 0; i < friends_list.length; i++)
+    // Create a table with one row per result
+    table
+      tr
+      - for (var key in friends_list[i])
+        td #{key}  #{friends_list[i][key]}
+        td &nbsp;
+        br
+    #{friends_list[i].FIRST_NAME}&nbsp #{friends_list[i].LAST_NAME}
+    br
   
   
   

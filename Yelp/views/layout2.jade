@@ -1,27 +1,20 @@
 doctype html
 html
-	head
-		block head
-			block title
-				title Smarter Yelp
-			block meta
-				meta(name='description', content='')
-				meta(name='keywords', content='')
-			link(rel='stylesheet', href='/css/bootstrap.min.css')
-			| <style>
-			| body { padding-top: 60px; padding-left: 100px; }
-			| </style>
-			script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-	body
-		.container
+  head
+    block head
+      block title
+        title Smarter Yelp
+      block meta
+        meta(name='description', content='')
+        meta(name='keywords', content='')
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href = '/css/sections.css')
+  
+  body
+    .container
       .left-section
         block left-section
       .main-content
         block content
       .sidebar
         block sidebar
-
-		block content
-		
-
-		

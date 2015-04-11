@@ -7,9 +7,26 @@ block content
   // Create a table with one row per result
   table
     tr
-    - for (var key in user)
-      td #{key}  #{user[key]}
+    - for (var key in current_user)
+      td #{key}  #{current_user[key]}
       td &nbsp;
+   
+  br   
+  //Similar User
+  p
+    | People you may know:
+  - for (var i = 0; i < similar_user.length; i++)        
+    table
+      tr
+      - for (var key in similar_user[i])
+        td #{key}  #{similar_user[i][key]}
+        td &nbsp;
+        br      
+      
+      
+      
+      
+  br    
   br
   form(method='get', action='/logout')
     input(type='submit', value='Logout')

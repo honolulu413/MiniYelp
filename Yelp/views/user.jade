@@ -1,9 +1,8 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
-extend layout1
+extend layout
 
 block content
-  div.top
     p
       | #{title}:
   // Create a table with one row per result
@@ -15,6 +14,7 @@ block content
         br
       form(method='get', action='/logout')
       input(type='submit', value='Logout')
+      
     p
       | Search Business:
       br
@@ -36,8 +36,6 @@ block content
       
       
 //Favorite Businesses
-  //div.container
-    div.content
       p
         | Favorite Businesses:
       - for (var i = 0; i < business_list.length; i++)
@@ -54,7 +52,7 @@ block content
   
  
 //Friends
-  //div.bottom
+block left
     p
       | Friends:
     - for (var i = 0; i < friends_list.length; i++)

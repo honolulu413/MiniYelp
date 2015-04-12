@@ -1,0 +1,15 @@
+extend layout1
+block content
+  p
+    | You may want to go to:
+  - for (var i = 0; i < business_list.length; i++)
+    // Create a table with one row per result
+    table
+      tr
+      - for (var key in business_list[i])
+        td #{key}  #{business_list[i][key]}
+        td &nbsp;
+        br
+    a(href='/business/' + business_list[i]["BUSINESS_ID"]) details
+    br
+  // Put a click button that lets us return to the index page 

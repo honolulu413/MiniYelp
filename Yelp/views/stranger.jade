@@ -1,0 +1,34 @@
+// Jade file to specify output of an actors list
+// Inherits from layout
+
+extend layout1
+block content
+  p
+    | #{title}:
+  // Create a table with one row per result
+  table
+    tr
+    - for (var key in user_info)
+      td #{key}  #{user_info[key]}
+      td &nbsp;
+      br
+      
+  - if (business_list !== null)
+    - for (var i = 0; i < business_list.length; i++)
+      table
+        tr
+        - for (var key in business_list[i])
+          td #{key}  #{business_list[i][key]}
+          td &nbsp;
+          br
+    
+  - if (is_friend === false)
+    form(method='post', action='/user/add_friend')
+      input(type='hidden', name='current_user_id', value='#{current_user_id}') 
+      input(type='hidden', name='stranger_id', value='#{stranger_id}') 
+      input(type='submit', value='Add friend') 
+      
+   
+  br   
+
+  // Put a click button that lets us return to the index page 

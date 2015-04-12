@@ -7,7 +7,7 @@
 /**
  * Module dependencies.
  */
-var express = require('express'), routes = require('./routes'), register = require('./routes/register'), login = require('./routes/login'), user = require('./routes/user'), http = require('http'), path = require('path'), stylus = require("stylus"), nib = require("nib"), business_list = require('./routes/business_list'), businesses = require('./routes/business'), logout = require('./routes/logout'), favorite = require('./routes/favorite'), invite = require('./routes/invite'), add_friend = require('./routes/add_friend');
+var express = require('express'), google = require('./routes/google'),routes = require('./routes'), register = require('./routes/register'), login = require('./routes/login'), user = require('./routes/user'), http = require('http'), path = require('path'), stylus = require("stylus"), nib = require("nib"), business_list = require('./routes/business_list'), businesses = require('./routes/business'), logout = require('./routes/logout'), favorite = require('./routes/favorite'), invite = require('./routes/invite'), add_friend = require('./routes/add_friend');
 var session = require('express-session');
 
 // Initialize express
@@ -23,6 +23,7 @@ app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
 app.get('/logout', logout.get);
 app.get('/favorite', favorite.get);
+app.get('/google', google.do_work);
 app.post('/invite', invite.post);
 
 app.post('/register', register.post);

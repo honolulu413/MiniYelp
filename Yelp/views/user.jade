@@ -9,16 +9,7 @@ block content
     tr
     - for (var key in current_user)
       td #{key}  #{current_user[key]}
-      td &nbsp;
-   
-  br
-  //invite to party
-  form(method='post', action='/invite')
-    input(type='hidden', name='friends_list', value='#{current_user}') 
-    input(type='checkbox', name='friends_list', value='1') 
-    input(type='checkbox', name='friends_list', value='2') 
-    input(type='checkbox', name='friends_list', value='3') 
-    input(type='submit', value='Invite friends to party!')   
+      td &nbsp; 
    
   br
   //Invite Friends

@@ -5,7 +5,6 @@ block content
   p
     | Current user: #{userName}
     br
-    br
   
     | Information about this business:  
   - for (var i = 0; i < business.length; i++)
@@ -15,6 +14,16 @@ block content
           tr
             td #{key} :  #{business[i][key]}  
   
+  br
+  p
+    | Bing search
+   br
+  form(method='post', action='/bing')
+    input(type='hidden', name='BUSINESS_NAME', value='#{business[0]["NAME"]}') 
+    input(type='hidden', name='BUSINESS_CITY', value='#{business[0]["CITY"]}') 
+    input(type='hidden', name='BUSINESS_STATE', value='#{business[0]["STATE"]}') 
+    input(type='submit', value='Search in Bing')
+     
   br
   form(method='post', action='/favorite')
     input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 

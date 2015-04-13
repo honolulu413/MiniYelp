@@ -4,9 +4,38 @@ extend layoutSimple
 // Then we produce a form that triggers /actor once
 // the user hits Submit
 block content
-    .alert.alert-warning(role='alert')
-      #{message}
-    
+
+  //if(message!==null)
+    //.alert.alert-warning(role='alert')
+      //#{message}
+  .container     
+    #myCarousel.carousel.slide(data-ride='carousel')
+      // Indicators
+      ol.carousel-indicators
+        li.active(data-target='#myCarousel', data-slide-to='0')
+        li(data-target='#myCarousel', data-slide-to='1')
+        li(data-target='#myCarousel', data-slide-to='2')
+      // Wrapper for slides
+      .carousel-inner(role='listbox')
+        .item.active
+          img(src='hotpot.jpg', alt='hotpot', width='460', height='345')
+        .item
+          img(src='sushi.jpg', alt='sushi', width='460', height='345')
+        .item
+          img(src='desert.png', alt='desert', width='460', height='345')
+      a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+               
+        span.sr-only Previous
+           
+      a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+               
+        span.sr-only Next
+
+  
+      
+  .contatiner  
     h2.form-sigin-heading Please sign in
     form.form-inline(method="post", id="loginForm")
       .form-group
@@ -16,9 +45,10 @@ block content
         label Password
         input.form-control(name="PASSWORD",type = "Password")
       button.btn.btn-primary(type='submit') Sign in
-    
-    h2.form-signup-heading Welcome to join Smart Yelp
-    form(method='post', action='/register')
+      
+  .contatiner(style = "max-width: 330px;padding: 15px;margin: 0 auto;")  
+    h2.form-signin-heading Welcome to join Smart Yelp
+    form.form-signin(method='post', action='/register')
       - for (var i = 0; i < schema.length; i++)
         form-group
           label() #{label[i]}
@@ -26,3 +56,4 @@ block content
           //.col-md-8
           input.form-control(type='text', name='#{schema[i]}', value='',width = '50%') 
       button.btn.btn-primary(type='submit') Sign Up
+s

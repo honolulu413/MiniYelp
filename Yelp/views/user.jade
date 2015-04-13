@@ -2,7 +2,7 @@
 // Inherits from layout
 extend layout
 block left
-  panel.panel-success
+  panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title #{title}
     .page-body
@@ -11,10 +11,10 @@ block left
         li #{key}  #{current_user[key]}
 
       br   
-    form(method='get', action='/logout')
-      button.btn.btn-primary(type='submit') Log out
+    form(method='get', action='/logout',)
+      button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Log out
    
-  panel.panel-danger
+  panel.panel-danger(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title Start a Party
     .page-body
@@ -27,10 +27,10 @@ block left
               input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
           
         //input(type='hidden', name='friends_list', value='#{current_user["USER_NAME_ID"]}')
-        button.btn.btn-primary(type='submit') Invite friends to party!
+        button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Invite friends to party!
 
   //Similar User
-  panel.panel-success
+  panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title People you may know
     .page-body
@@ -59,7 +59,7 @@ block left
   
   
 block content  
-  panel.panel-danger
+  panel.panel-danger(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title Search a Business
     .page-body
@@ -76,11 +76,11 @@ block content
         br
         input(type='text', name='state', value='')
         br
-        button.btn.btn-primary(type='submit') Search
+        button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Search
   // Put a click button that lets us return to the index page 
 
   //Favorite Businesses
-  .panel.panel-info
+  .panel.panel-info(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title Favorites
     .page-body

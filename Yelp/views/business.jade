@@ -1,75 +1,34 @@
 // Jade file to specify output of an actors list
-// Inherits from layout
-extend layoutSimple
-block content
-  p
-    | Current user: #{userName}
-    br
-  
-    | Information about this business:  
-  - for (var i = 0; i < business.length; i++)
-    // Create a table with one row per result
-    table
-      - for (var key in business[i])
-          tr
-            td #{key} :  #{business[i][key]}  
-  
-  br
-  p
-    | Bing search
-   br
-  form(method='post', action='/bing')
-    input(type='hidden', name='BUSINESS_NAME', value='#{business[0]["NAME"]}') 
-    input(type='hidden', name='BUSINESS_CITY', value='#{business[0]["CITY"]}') 
-    input(type='hidden', name='BUSINESS_STATE', value='#{business[0]["STATE"]}') 
-    input(type='submit', value='Search in Bing')
-     
-  br
-  form(method='post', action='/favorite')
-    input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 
-    input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
-    input(type='submit', value='Add to my favorites') 
-       
-  br	
-  | Top Positive Reviews:
-  br                       
-  - for (var i = 0; i < goodRievew.length; i++)
-    // Create a table with one row per result
-    table
-      tr REVIEW_DATE:  #{goodRievew[i]["REVIEW_DATE"]}
-      br
-      tr REVIEW_TEXT:  #{goodRievew[i]["REVIEW_TEXT"]}
-      br
-      tr STAR:  #{goodRievew[i]["STAR"]}
-      br
-      br
-      
-  br	
-  | Top Negative Reviews:
-  br                       
-  - for (var i = 0; i < badReview.length; i++)
-    // Create a table with one row per result
-    table
-      tr REVIEW_DATE:  #{badReview[i]["REVIEW_DATE"]}
-      br
-      tr REVIEW_TEXT:  #{badReview[i]["REVIEW_TEXT"]}
-      br
-      tr STAR:  #{badReview[i]["STAR"]}
-      br
-      br
-  p
-    | You may also like:
-  - for (var i = 0; i < similarBusinesses.length; i++)
-    // Create a table with one row per result
-    table
-      tr
-      - for (var key in similarBusinesses[i])
-        td #{key}  #{similarBusinesses[i][key]}
-        td &nbsp;
+// Inherits from layoutPage
+extend layoutPage
+block left
+  panel.panel-info(style = "margin-bottom: 10px;")
+    .panel-heading
+      .panel-title Basic Information
+    .page-body  
+      p
+        | Current user: #{userName}
         br
-    a(href='/business/' + similarBusinesses[i]["BUSINESS_ID"]) details
-    br
-    
+      
+        | Information about this business:  
+      - for (var i = 0; i < business.length; i++)
+        // Create a table with one row per result
+        table
+          - for (var key in business[i])
+              tr
+                td #{key} :  #{business[i][key]}
+      .row  
+        .col-md-4
+          form(method='post', action='/bing')
+            input(type='hidden', name='BUSINESS_NAME', value='#{business[0]["NAME"]}') 
+            input(type='hidden', name='BUSINESS_CITY', value='#{business[0]["CITY"]}') 
+            input(type='hidden', name='BUSINESS_STATE', value='#{business[0]["STATE"]}') 
+            input(type='submit', value='Search in Bing')
+        .col-md-4
+          form(method='post', action='/favorite')
+            input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 
+            input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
+            input(type='submit', value='Add to my favorites')
     
   //Google map
   script(src="https://maps.googleapis.com/maps/api/js?v=3.exp")    
@@ -116,3 +75,44 @@ block content
   p
     #googleMap(style="width:500px; height:380px;")
   //Google map
+   
+
+block content       
+  | Top Positive Reviews:
+  br                       
+  - for (var i = 0; i < goodRievew.length; i++)
+    // Create a table with one row per result
+    table
+      tr REVIEW_DATE:  #{goodRievew[i]["REVIEW_DATE"]}
+      br
+      tr REVIEW_TEXT:  #{goodRievew[i]["REVIEW_TEXT"]}
+      br
+      tr STAR:  #{goodRievew[i]["STAR"]}
+      br
+      br
+      
+  br	
+  | Top Negative Reviews:
+  br                       
+  - for (var i = 0; i < badReview.length; i++)
+    // Create a table with one row per result
+    table
+      tr REVIEW_DATE:  #{badReview[i]["REVIEW_DATE"]}
+      br
+      tr REVIEW_TEXT:  #{badReview[i]["REVIEW_TEXT"]}
+      br
+      tr STAR:  #{badReview[i]["STAR"]}
+      br
+      br
+
+block bottom  
+  p You may also like:
+    - for (var i = 0; i < similarBusinesses.length; i++)
+      // Create a table with one row per result
+      table.table.table-striped
+        tr
+        - for (var key in similarBusinesses[i])
+          td #{key}  #{similarBusinesses[i][key]}
+          td &nbsp;
+          br
+      a(href='/business/' + similarBusinesses[i]["BUSINESS_ID"]) details

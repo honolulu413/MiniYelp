@@ -1,17 +1,17 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
-extend layout1
+extend layoutSimple
 block content
   p
     | #{title}:
   - for (var i = 0; i < business_list.length; i++)
     // Create a table with one row per result
-    table
-      tr
-      - for (var key in business_list[i])
-        td #{key}  #{business_list[i][key]}
-        td &nbsp;
-        br
-    a(href='/business/' + business_list[i]["BUSINESS_ID"]) details
-    br
-  // Put a click button that lets us return to the index page 
+    table.table.table-striped
+      tbody
+        tr
+          - for (var key in business_list[i])
+            td #{key}  #{business_list[i][key]}
+          td 
+            a(href='/business/' + business_list[i]["BUSINESS_ID"]) details
+
+         

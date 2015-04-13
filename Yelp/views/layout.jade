@@ -2,13 +2,14 @@ doctype html
 html
   include ./includes/head.jade
   body
-    h1 Here is outside of container
+    include ./includes/header.jade
+    h4 Here is outside of container
     .container-fluid
-      h1 My First Bootstrap Page
-      p This is some text.
+      h4 Inside container
       .row
-        .col-md-4(style='background-color:lavender;')
+        .col-md-4
           block left
-        .col-md-8(style='background-color:lavenderblush;')
+        .col-md-8
           block content
+    include ./includes/footer.jade
           

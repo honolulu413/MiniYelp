@@ -1,28 +1,28 @@
 // Basic Jade specification for querying for an actor
 // Inherits from layout 
-extend layout1
+extend layoutSimple
 // Then we produce a form that triggers /actor once
 // the user hits Submit
 block content
-    p
-    | #{message}
+    .alert.alert-warning(role='alert')
+      #{message}
     
-    div.top
-      form.form-horizontal(method="post", id="loginForm")
+    h2.form-sigin-heading Please sign in
+    form.form-inline(method="post", id="loginForm")
+      .form-group
         label Username
-        input.span3(name="USER_NAME_ID", placeholder="Enter your username")
+        input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
+      .form-group
         label Password
-        input.span3(name="PASSWORD")
-        input.btn(type="submit", value="Log In")
-    p
-    | Please register here:
+        input.form-control(name="PASSWORD",type = "Password")
+      button.btn.btn-primary(type='submit') Sign in
+    
+    h2.form-signup-heading Welcome to join Smart Yelp
     form(method='post', action='/register')
       - for (var i = 0; i < schema.length; i++)
-        label() #{label[i]}
-        input(type='text', name='#{schema[i]}', value='') 
-        br
-      input(type='submit', value='Register')
-      br
-      
-      
-      
+        form-group
+          label() #{label[i]}
+          //label.col-md-4(value='#{label[i]}')
+          //.col-md-8
+          input.form-control(type='text', name='#{schema[i]}', value='',width = '50%') 
+      button.btn.btn-primary(type='submit') Sign Up

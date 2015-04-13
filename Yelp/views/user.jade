@@ -1,101 +1,96 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
-extend layout1
-block content
-  p
-    | #{title}:
-  // Create a table with one row per result
-  table
-    tr
-    - for (var key in current_user)
-      td #{key}  #{current_user[key]}
-      td &nbsp; 
+extend layout
+block left
+  panel.panel-success
+    .panel-heading
+      .panel-title #{title}
+    .page-body
+    ul
+      - for (var key in current_user)
+        li #{key}  #{current_user[key]}
+
+      br   
+    form(method='get', action='/logout')
+      button.btn.btn-primary(type='submit') Log out
    
-  br
-  //Invite Friends
-  p
-    | Friends:
-    form(method='post', action='/invite')
-      - for (var i = 0; i < friends_list.length; i++)
-        | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
-        a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
-        input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
-        br
-      
-      //input(type='hidden', name='friends_list', value='#{current_user["USER_NAME_ID"]}')
-      br
-      input(type='submit', value='Invite friends to party!')   
-    
-   
-   
-  br 
-  br   
+  panel.panel-danger
+    .panel-heading
+      .panel-title Start a Party
+    .page-body
+      form(method='post', action='/invite')
+        ul.list-group
+          - for (var i = 0; i < friends_list.length; i++)
+            li.list-group-item 
+              | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
+              a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
+              input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
+          
+        //input(type='hidden', name='friends_list', value='#{current_user["USER_NAME_ID"]}')
+        button.btn.btn-primary(type='submit') Invite friends to party!
+
   //Similar User
-  p
-    | People you may know:
-  - for (var i = 0; i < similar_user.length; i++)        
-    table
-      tr
-      - for (var key in similar_user[i])
-        td #{key}  #{similar_user[i][key]}
-        td &nbsp;
-        br      
-      
-      
-      
-      
-  br    
-  br
-  form(method='get', action='/logout')
-    input(type='submit', value='Logout')
-    
-  //Favorite Businesses
-  p
-    | Favorite Businesses:
-  - for (var i = 0; i < business_list.length; i++)
-    // Create a table with one row per result
-    table
-      tr
-      - for (var key in business_list[i])
-        td #{key}  #{business_list[i][key]}
-        td &nbsp;
-        br
-    a(href='/business/' + business_list[i]["BUSINESS_ID"]) details
-    br
-    
-    
-  //Friends
-  p
-    | Friends:
-  - for (var i = 0; i < friends_list.length; i++)
-    // Create a table with one row per result
-    table
-      tr
-      - for (var key in friends_list[i])
-        td #{key}  #{friends_list[i][key]}
-        td &nbsp;
-        br
+  panel.panel-success
+    .panel-heading
+      .panel-title People you may know
+    .page-body
+    ul.list-group
+      - for (var i = 0; i < similar_user.length; i++)        
+        li.list-group-item
+          li.list-group-item-text
+            ul
+              - for (var key in similar_user[i])
+                li #{key}  #{similar_user[i][key]}
+
+  //- //Friends
+  //- p
+  //-   | Friends:
+  //- - for (var i = 0; i < friends_list.length; i++)
+  //-   // Create a table with one row per result
+  //-   table
+  //-     tr
+  //-     - for (var key in friends_list[i])
+  //-       td #{key}  #{friends_list[i][key]}
+  //-       td &nbsp;
+  //-       br
         
-    #{friends_list[i].FIRST_NAME}&nbsp #{friends_list[i].LAST_NAME}
-    br
+  //-   #{friends_list[i].FIRST_NAME}&nbsp #{friends_list[i].LAST_NAME}
+  //-   br
   
   
-  
-  h3
-  |  Search Business:
-  br
-  form(method='get', action='/business_list')
-    label() Business Name: 
-    br
-    input(type='text', name='name', value='')
-    br
-    label() City: 
-    br
-    input(type='text', name='city', value='')
-    br
-    label() State: 
-    br
-    input(type='text', name='state', value='')
-    br
-    input(type='submit', value='Search')
+block content  
+  panel.panel-danger
+    .panel-heading
+      .panel-title Search a Business
+    .page-body
+      form(method='get', action='/business_list')
+        label() Business Name: 
+        br
+        input(type='text', name='name', value='')
+        br
+        label() City: 
+        br
+        input(type='text', name='city', value='')
+        br
+        label() State: 
+        br
+        input(type='text', name='state', value='')
+        br
+        button.btn.btn-primary(type='submit') Search
   // Put a click button that lets us return to the index page 
+
+  //Favorite Businesses
+  .panel.panel-info
+    .panel-heading
+      .panel-title Favorites
+    .page-body
+      - for (var i = 0; i < business_list.length; i++)
+        // Create a table with one row per result
+        table.table-striped
+          //thead
+          tbody
+            tr
+              - for (var key in business_list[i])
+                td #{key}  #{business_list[i][key]}
+              td 
+                a(href='/business/' + business_list[i]["BUSINESS_ID"]) details

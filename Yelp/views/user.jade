@@ -6,7 +6,8 @@ extend layout
 block left
   panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
-      .panel-title #{title}
+      .panel-title 
+        a#account #{title}
     .page-body
     ul
       +extend_row(current_user)
@@ -17,7 +18,8 @@ block left
    
   panel.panel-danger(style = "margin-bottom: 10px;")
     .panel-heading
-      .panel-title Start a Party
+      .panel-title 
+        a#friends Start a Party
     .page-body
 //      form(method='post', action='/invite')
 //        ul.list-group
@@ -33,7 +35,8 @@ block left
   //Similar User
   panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
-      .panel-title People you may know
+      .panel-title 
+        a#acquaintance People you may know
     .page-body
     +extend_row_array(similar_user_list)
 
@@ -56,7 +59,8 @@ block left
 block content  
   panel.panel-danger(style = "margin-bottom: 10px;")
     .panel-heading
-      .panel-title Search a Business
+      .panel-title 
+        a#search Search a Business
     .page-body
       form(method='get', action='/business_list')
         label() Business Name: 
@@ -77,6 +81,7 @@ block content
   //Favorite Businesses
   .panel.panel-info(style = "margin-bottom: 10px;")
     .panel-heading
-      .panel-title Favorites
+      .panel-title 
+        a#favourites Favorites
     .page-body
     +extend_row_array(business_list)

@@ -8,7 +8,17 @@ block content
   //if(message!==null)
     //.alert.alert-warning(role='alert')
       //#{message}
-  .container     
+  .contatiner(style = "padding: 15px;margin: 0 auto;")  
+    form.form-inline(method="post", id="loginForm")
+      .form-group
+        label Username
+        input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
+      .form-group
+        label Password
+        input.form-control(name="PASSWORD",type = "Password")
+      button.btn.btn-primary(type='submit') Sign in
+      
+  .container(style = "width = 500px; height = 350px")     
     #myCarousel.carousel.slide(data-ride='carousel')
       // Indicators
       ol.carousel-indicators
@@ -35,18 +45,7 @@ block content
 
   
       
-  .contatiner  
-    h2.form-sigin-heading Please sign in
-    form.form-inline(method="post", id="loginForm")
-      .form-group
-        label Username
-        input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
-      .form-group
-        label Password
-        input.form-control(name="PASSWORD",type = "Password")
-      button.btn.btn-primary(type='submit') Sign in
-      
-  .contatiner(style = "max-width: 330px;padding: 15px;margin: 0 auto;")  
+  .contatiner(style = "max-width: 350px;padding: 15px;margin: 0 auto;")  
     h2.form-signin-heading Welcome to join Smart Yelp
     form.form-signin(method='post', action='/register')
       - for (var i = 0; i < schema.length; i++)

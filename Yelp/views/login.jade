@@ -5,17 +5,15 @@ extend layoutSimple
 // the user hits Submit
 block content
 
-  //if(message!==null)
-    //.alert.alert-warning(role='alert')
-      //#{message}
+  - if(typeof message !== 'undefined')
+    .alert.alert-warning(role='alert')
+      p #{message}
   .contatiner(style = "padding: 15px;margin: 0 auto;")  
     form.form-inline(method="post", id="loginForm")
       .form-group
-        label Username
         input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
       .form-group
-        label Password
-        input.form-control(name="PASSWORD",type = "Password")
+        input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
       button.btn.btn-primary(type='submit') Sign in
       
   .container(style = "width = 500px; height = 350px")     
@@ -28,11 +26,11 @@ block content
       // Wrapper for slides
       .carousel-inner(role='listbox')
         .item.active
-          img(src='hotpot.jpg', alt='hotpot', width='460', height='345')
+          img(src='/images/hotpot.jpg', alt='hotpot', width='700', height='280', style = 'width: 70%; margin: auto;')
         .item
-          img(src='sushi.jpg', alt='sushi', width='460', height='345')
+          img(src='/images/sushi.jpg', alt='sushi', width='700', height='280', style = 'width: 70%; margin: auto;')
         .item
-          img(src='desert.png', alt='desert', width='460', height='345')
+          img(src='/images/desert.jpg', alt='desert', width='700', height='280', style = 'width: 70%; margin: auto;')
       a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
         span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
                
@@ -45,8 +43,8 @@ block content
 
   
       
-  .contatiner(style = "max-width: 350px;padding: 15px;margin: 0 auto;")  
-    h2.form-signin-heading Welcome to join Smart Yelp
+  .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
+    h2.form-signin-heading Join Smart Yelp
     form.form-signin(method='post', action='/register')
       - for (var i = 0; i < schema.length; i++)
         form-group

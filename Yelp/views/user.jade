@@ -89,10 +89,13 @@ block content
       .panel-title 
         a#favourites Favorites
     .page-body
-      - for (var i = 0; i < business_list.length; i++)
-        // Create a table with one row per result
-        table.table.table-striped
-          //thead
+      table.table.table-striped
+        thead
+          tr
+            th Name
+            th City
+            th star
+        - for (var i = 0; i < business_list.length; i++)
           tbody
             tr
               - for (var key in business_list[i])

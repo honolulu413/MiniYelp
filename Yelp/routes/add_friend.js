@@ -7,8 +7,8 @@ var project = require('../lib/table').project;
 function post(request, response) {
 	console.log('friend request');
 	
-	current_user_id = request.body['current_user_id'];
-	stranger_id = request.body['stranger_id'];
+	var current_user_id = request.body['current_user_id'];
+	var stranger_id = request.body['stranger_id'];
 	
 	database.insert(APP_USER_FRIENDS, {
 		schema : APP_USER_FRIENDS.primaryKey,

@@ -11,11 +11,19 @@ block left
       - for (var key in user_info)
         li #{key}  #{user_info[key]}
 
+  // add-friend button
   - if (is_friend === false)
     form(method='post', action='/user/add_friend')
       input(type='hidden', name='current_user_id', value='#{current_user_id}') 
       input(type='hidden', name='stranger_id', value='#{stranger_id}') 
       input(type='submit', value='Add friend') 
+      
+  form(method='post', action='/user/send_message')
+    input(type='hidden', name='current_user_id', value='#{current_user_id}') 
+    input(type='hidden', name='stranger_id', value='#{stranger_id}') 
+    input(type='text', name='message', value='send message to your friend!') 
+    input(type='submit', value='send') 
+
       
    
   br   

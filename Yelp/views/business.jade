@@ -1,5 +1,8 @@
 // Jade file to specify output of an actors list
 // Inherits from layoutPage
+
+include ./includes/row_list.jade
+
 extend layoutPage
 block left
   panel.panel-info(style = "margin-bottom: 10px;")
@@ -114,11 +117,5 @@ block bottom
   h3 
     span.label.label-info You may also like: 
   p You may also like:
-    - for (var i = 0; i < similarBusinesses.length; i++)
-      // Create a table with one row per result
-      table.table.table-striped
-        tbody
-          tr
-          - for (var key in similarBusinesses[i])
-            td #{key}  #{similarBusinesses[i][key]}
-          td a(href='/business/' + similarBusinesses[i]["BUSINESS_ID"]) details
+      +extend_row_array(similar_business_list)
+  

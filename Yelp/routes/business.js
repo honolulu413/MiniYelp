@@ -1,6 +1,8 @@
 var database = require('../lib/database');
 var BUSINESSES = require('../lib/table').BUSINESSES;
 var getPath = require('../lib/string').getPath;
+var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
+
 
 //function get(request, respond) {
 //  var businessID = /^\/([^\/]+)/.exec(request.params[0])[1];
@@ -63,23 +65,26 @@ function get(request, respond) {
                 batchQuery.push(badReview);
                 batchQuery.push(similarBusinesses);
 
-                database.executeBatch(batchQuery, function(err, results) {
+                database.executeBatch(batchQuery, function(err, resultsArray) {
                     if (err === null) {
+                    	var similarBusinessList = rowArrayWithLabel(resultsArray[2], ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
+                    	// adjust business url format
+						for(var i = 0; i < similarBusinessList.length; i++) {
+							similarBusinessList[i].data[0] = '/business/' + similarBusinessList[i].data[0];
+						}
+						console.log("=============");
+						console.log(similarBusinessList);
+						
                         var businessList = [];
                         businessList.push(businessInfo);
                         respond.render('business.jade', {   
                             business: businessList,
-                            goodRievew : results[0],
-                            badReview : results[1],
+                            goodRievew : resultsArray[0],
+                            badReview : resultsArray[1],
                             userName: currentUser,
-                            similarBusinesses: results[2]
+                            similar_business_list: similarBusinessList
                         });
                         
-                      console.log(results[0]);
-//                      console.log(results[1]);
-//                      console.log(results[0].length);
-//                      console.log(results[1].length);
-//                      console.log(results[2]);
                     }
                 }); 
             }

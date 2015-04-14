@@ -13,6 +13,7 @@ block left
       +extend_row(current_user)
 
       br   
+      +extend_row_array(message)
     form(method='get', action='/logout',)
       button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Log out
    
@@ -21,24 +22,25 @@ block left
       .panel-title 
         a#friends Start a Party
     .page-body
-//      form(method='post', action='/invite')
-//        ul.list-group
-//          - for (var i = 0; i < friends_list.length; i++)
-//            li.list-group-item 
-//              | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
-//              a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
-//              input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
+      form(method='post', action='/invite')
+        ul.list-group
+          - for (var i = 0; i < friends_list.length; i++)
+            li.list-group-item 
+              | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
+              a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
+              input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
           
         //input(type='hidden', name='friends_list', value='#{current_user["USER_NAME_ID"]}')
-//        button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Invite friends to party!
-
+        button.btn.btn-primary(type='submit') Invite friends to party!
+        
+       
   //Similar User
   panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title 
         a#acquaintance People you may know
     .page-body
-    +extend_row_array(similar_user_list)
+      +extend_row_array(similar_user_list)
 
   //- //Friends
   //- p

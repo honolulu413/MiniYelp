@@ -48,7 +48,6 @@ function rowArrayWithLabel(results, newSchema, label) {
 	return rowArray;
 }
 
-//function addFieldToRowArray()
 
 
 exports.getData = getData;

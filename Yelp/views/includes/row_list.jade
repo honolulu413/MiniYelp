@@ -3,18 +3,23 @@ mixin extend_row(row)
     li #{row.label[i]}  #{row.data[i]}
 
 mixin extend_row_array(row_array)
-  table.table.table-striped
-    thead
-      tr
-        - for (var i = 0; i < row_array[0].label.length; i++)
-          th #{row_array[0].label[i]}
-    - for (var i = 0; i < row_array.length; i++)
-      - var row = row_array[i]
-      tbody
+  - if(row_array.length > 0)
+    table.table.table-striped
+      thead
         tr
-          - for (var j = 0; j < row.label.length; j++)
-            td #{row.data[j]}
-          td
-            a(href='123') details
+          - for (var i = 0; i < row_array[0].label.length; i++)
+            - if (row_array[0].label[i][0] != '.')
+              th #{row_array[0].label[i]}
+      - for (var i = 0; i < row_array.length; i++)
+        - var row = row_array[i]
+        tbody
+          tr
+            - for (var j = 0; j < row.label.length; j++)
+              - if (row.label[j][0] != '.')
+                td #{row.data[j]}
+            - for (var j = 0; j < row.label.length; j++)
+              - if (row.label[j] == '.url')
+                td
+                  a(href=row.data[j]) details
                 
                 

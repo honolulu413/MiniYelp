@@ -7,7 +7,23 @@
 /**
  * Module dependencies.
  */
-var express = require('express'), routes = require('./routes'), register = require('./routes/register'), login = require('./routes/login'), user = require('./routes/user'), http = require('http'), path = require('path'), stylus = require("stylus"), nib = require("nib"), business_list = require('./routes/business_list'), businesses = require('./routes/business'), logout = require('./routes/logout'), favorite = require('./routes/favorite'), invite = require('./routes/invite'), add_friend = require('./routes/add_friend');
+var express = require('express')
+ , routes = require('./routes')
+ , register = require('./routes/register')
+ , login = require('./routes/login')
+ , user = require('./routes/user')
+ , http = require('http')
+ , path = require('path')
+ , stylus = require("stylus")
+ , nib = require("nib")
+ , business_list = require('./routes/business_list')
+ , businesses = require('./routes/business')
+ , logout = require('./routes/logout')
+ , favorite = require('./routes/favorite')
+ , invite = require('./routes/invite')
+ , add_friend = require('./routes/add_friend')
+ , message = require('./routes/message')
+ ;
 var bing = require('./routes/bing');
 var session = require('express-session');
 
@@ -32,6 +48,7 @@ app.post('/register', register.post);
 app.post('/login', login.post);
 app.post('/favorite', favorite.post);
 app.post('/user/add_friend', add_friend.post);
+app.post('/user/send_message', message.post);
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function() {

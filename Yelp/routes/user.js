@@ -1,4 +1,5 @@
 var database = require('../lib/database');
+var database_nosql = require('../lib/database_nosql');
 var APP_USERS = require('../lib/table').APP_USERS;
 var alphanumeric = require('../lib/string.js').alphanumeric;
 var getPath = require('../lib/string').getPath;
@@ -57,23 +58,31 @@ function get(request, respond) {
 									if (errArray === null) {
 										
 										var similarUserList = rowArrayWithLabel(resultsArray[0], ['USER_NAME_ID', 'FIRST_NAME', 'LAST_NAME'], ['user id', 'first name', 'last name']);
-										var businessList = rowArrayWithLabel(resultsArray[1], ['NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['name', 'address', 'city', 'star']);
+										var businessList = rowArrayWithLabel(resultsArray[1], ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
+										// adjust business url format
+										for(var i = 0; i < businessList.length; i++) {
+											businessList[i].data[0] = '/business/' + businessList[i].data[0];
+										}
 										var friendsList = rowArrayWithLabel(resultsArray[2], ['USER_NAME_ID', 'FIRST_NAME', 'LAST_NAME'], ['user id', 'first name', 'last name']);
 
-										var businessListU
 										
 										var currentUserRowWithLabel = {
 												label : ['user id', 'name'],
 												data : [currentUser.USER_NAME_ID, currentUser.FIRST_NAME + currentUser.LAST_NAME]
 										};
 										
-										respond.render('user.jade', {
-											title : userName,
-											similar_user_list : similarUserList,
-											business_list : businessList,
-											friends_list : friendsList,
-											current_user : currentUserRowWithLabel
+										database_nosql.find('message', {receiver:userName}, function(results){
+											var message = rowArrayWithLabel(results, ['sender', 'text'], ['sender', 'new message']);
+											console.log(message);
+											respond.render('user.jade', {
+												title : userName,
+												similar_user_list : similarUserList,
+												business_list : businessList,
+												friends_list : resultsArray[2],
+												current_user : currentUserRowWithLabel,
+												message : message
 
+											});
 										});
 									}
 								});

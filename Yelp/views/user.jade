@@ -1,5 +1,7 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
+
+include ./includes/row_list.jade
 extend layout
 block left
   panel.panel-success(style = "margin-bottom: 10px;")
@@ -8,8 +10,7 @@ block left
         a#account #{title}
     .page-body
     ul
-      - for (var key in current_user)
-        li #{key}  #{current_user[key]}
+      +extend_row(current_user)
 
       br   
     form(method='get', action='/logout',)
@@ -20,16 +21,16 @@ block left
       .panel-title 
         a#friends Start a Party
     .page-body
-      form(method='post', action='/invite')
-        ul.list-group
-          - for (var i = 0; i < friends_list.length; i++)
-            li.list-group-item 
-              | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
-              a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
-              input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
+//      form(method='post', action='/invite')
+//        ul.list-group
+//          - for (var i = 0; i < friends_list.length; i++)
+//            li.list-group-item 
+//              | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
+//              a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
+//              input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
           
         //input(type='hidden', name='friends_list', value='#{current_user["USER_NAME_ID"]}')
-        button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Invite friends to party!
+//        button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Invite friends to party!
 
   //Similar User
   panel.panel-success(style = "margin-bottom: 10px;")
@@ -37,13 +38,7 @@ block left
       .panel-title 
         a#acquaintance People you may know
     .page-body
-    ul.list-group
-      - for (var i = 0; i < similar_user.length; i++)        
-        li.list-group-item
-          li.list-group-item-text
-            ul
-              - for (var key in similar_user[i])
-                li #{key}  #{similar_user[i][key]}
+    +extend_row_array(similar_user_list)
 
   //- //Friends
   //- p
@@ -89,16 +84,4 @@ block content
       .panel-title 
         a#favourites Favorites
     .page-body
-      table.table.table-striped
-        thead
-          tr
-            th Name
-            th City
-            th star
-        - for (var i = 0; i < business_list.length; i++)
-          tbody
-            tr
-              - for (var key in business_list[i])
-                td #{key}  #{business_list[i][key]}
-              td 
-                a(href='/business/' + business_list[i]["BUSINESS_ID"]) details
+    +extend_row_array(business_list)

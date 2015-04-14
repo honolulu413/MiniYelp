@@ -1,19 +1,3 @@
-Skip to content
- This repository
-Explore
-Gist
-Blog
-Help
-@nevsaynev nevsaynev
- 
- Unwatch 4
-  Star 0
-  Fork 0
-sylsgl/550 PRIVATE
- branch: master  550/Yelp/routes/business.js
-honolulu413 2 days ago - "add similar businesses" Lu Lu
-1 contributor
-RawBlameHistory     130 lines (113 sloc)  4.271 kb
 var database = require('../lib/database');
 var BUSINESSES = require('../lib/table').BUSINESSES;
 var getPath = require('../lib/string').getPath;
@@ -143,5 +127,3 @@ function get(request, respond) {
 
 
 exports.get = get;
-Status API Training Shop Blog About
-© 2015 GitHub, Inc. Terms Privacy Security Contact

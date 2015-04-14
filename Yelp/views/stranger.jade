@@ -1,6 +1,6 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
-
+include ./includes/row_list.jade
 extend layoutPage
 block left
   panel.panel-success(style = "margin-bottom: 10px;")
@@ -30,14 +30,8 @@ block left
 
   // Put a click button that lets us return to the index page 
 block bottom
-  h1 Checkout your friend's favorite:    
-  - if (business_list !== null)
-    - for (var i = 0; i < business_list.length; i++)
-      table.table.table-striped
-        tr
-        - for (var key in business_list[i])
-          td #{key}  #{business_list[i][key]}
-          td &nbsp;
+  h1 Checkout your friend's favorite: 
+  +extend_row_array(business_list)
 
     
   

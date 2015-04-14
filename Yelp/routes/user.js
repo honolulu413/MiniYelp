@@ -117,10 +117,15 @@ function get(request, respond) {
 				database.executeBatch(queryBatch, function(
 						errArray, resultsArray) {
 					if (errArray === null) {
+						var businessList = rowArrayWithLabel(resultsArray[1], ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
+						// adjust business url format
+						for(var i = 0; i < businessList.length; i++) {
+							businessList[i].data[0] = '/business/' + businessList[i].data[0];
+						}
 						respond.render('stranger.jade', {
 							title : currentUserID,
 							user_info : resultsArray[0][0],
-							business_list : resultsArray[1],
+							business_list : businessList,
 							current_user_id : currentUserID,
 							stranger_id : strangerID,
 							is_friend : true

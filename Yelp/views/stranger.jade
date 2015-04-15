@@ -1,34 +1,37 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
+include ./includes/row_list.jade
+extend layoutPage
+block left
+  panel.panel-success(style = "margin-bottom: 10px;")
+    .panel-heading
+      .panel-title #{title}
+    .page-body
+    ul
+      - for (var key in user_info)
+        li #{key}  #{user_info[key]}
 
-extend layout1
-block content
-  p
-    | #{title}:
-  // Create a table with one row per result
-  table
-    tr
-    - for (var key in user_info)
-      td #{key}  #{user_info[key]}
-      td &nbsp;
-      br
-      
-  - if (business_list !== null)
-    - for (var i = 0; i < business_list.length; i++)
-      table
-        tr
-        - for (var key in business_list[i])
-          td #{key}  #{business_list[i][key]}
-          td &nbsp;
-          br
-    
+  // add-friend button
   - if (is_friend === false)
     form(method='post', action='/user/add_friend')
       input(type='hidden', name='current_user_id', value='#{current_user_id}') 
       input(type='hidden', name='stranger_id', value='#{stranger_id}') 
       input(type='submit', value='Add friend') 
       
+  form(method='post', action='/user/send_message')
+    input(type='hidden', name='current_user_id', value='#{current_user_id}') 
+    input(type='hidden', name='stranger_id', value='#{stranger_id}') 
+    input(type='text', name='message', value='send message to your friend!') 
+    input(type='submit', value='send') 
+
+      
    
   br   
 
   // Put a click button that lets us return to the index page 
+block bottom
+  h1 Checkout your friend's favorite: 
+  +extend_row_array(business_list)
+
+    
+  

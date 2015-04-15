@@ -2,6 +2,7 @@ var database = require('../lib/database');
 var BUSINESSES = require('../lib/table').BUSINESSES;
 var object2Row = require('../lib/row').object2Row;
 var alphanumeric = require('../lib/string.js').alphanumeric;
+var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
 
 
 function get(request, respond) {
@@ -17,9 +18,15 @@ function get(request, respond) {
 		
 	database.lowerSelect(BUSINESSES, rowQuery, function(err, results) {
 		if(err === null) {
+			var businessList = rowArrayWithLabel(results.slice(0, 10), ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
+			// adjust business url format
+			for(var i = 0; i < businessList.length; i++) {
+				businessList[i].data[0] = '/business/' + businessList[i].data[0];
+			}
+
 			respond.render('business_list.jade', {
 				title : BUSINESSES.name,
-				business_list : results.slice(0, 10),
+				business_list : businessList,
 				detalLink : null
 			});
 		}

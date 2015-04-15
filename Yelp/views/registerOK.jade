@@ -1,7 +1,8 @@
-extend layout1
+extend layoutSimple
 block content
-  p.
-  Register successfully!
+  .alert.alert-success(role='alert')
+    #{message}
+  h3 Register successfully!
   
   // Put a click button that lets us return to the index page 
   form(method='get', action='/login')

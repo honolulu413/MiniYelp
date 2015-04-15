@@ -1,0 +1,15 @@
+doctype html
+html
+  include ./includes/head.jade
+  body
+    include ./includes/header.jade
+    //h4 Here is outside of container
+    .container-fluid
+      //h4 Inside container
+      .row
+        .col-md-4
+          block left
+        .col-md-8
+          block content
+    include ./includes/footer.jade
+          

@@ -1,29 +1,56 @@
 // Basic Jade specification for querying for an actor
 // Inherits from layout 
-extend layout1
+extend layoutSimple
 // Then we produce a form that triggers /actor once
 // the user hits Submit
 block content
-    p
-    | #{message}
-    
-    div.top
-      form.form-horizontal(method="post", id="loginForm")
-        label Username
-        input.span3(name="USER_NAME_ID", placeholder="Enter your username")
-        label Password
-        input.span3(name="PASSWORD")
-        input.btn(type="submit", value="Log In")
-   
-    p
-    | Please register here:
-    form(method='post', action='/register')
+
+  - if(typeof message !== 'undefined')
+    .alert.alert-warning(role='alert')
+      p #{message}
+  .contatiner(style = "padding: 15px;margin: 0 auto;")  
+    form.form-inline(method="post", id="loginForm")
+      .form-group
+        input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
+      .form-group
+        input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
+      button.btn.btn-primary(type='submit') Sign in
+      
+  .container(style = "width = 500px; height = 350px")     
+    #myCarousel.carousel.slide(data-ride='carousel')
+      // Indicators
+      ol.carousel-indicators
+        li.active(data-target='#myCarousel', data-slide-to='0')
+        li(data-target='#myCarousel', data-slide-to='1')
+        li(data-target='#myCarousel', data-slide-to='2')
+      // Wrapper for slides
+      .carousel-inner(role='listbox')
+        .item.active
+          img(src='/images/hotpot.jpg', alt='hotpot', width='700', height='280', style = 'width: 70%; margin: auto;')
+        .item
+          img(src='/images/sushi.jpg', alt='sushi', width='700', height='280', style = 'width: 70%; margin: auto;')
+        .item
+          img(src='/images/desert.jpg', alt='desert', width='700', height='280', style = 'width: 70%; margin: auto;')
+      a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+               
+        span.sr-only Previous
+           
+      a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+               
+        span.sr-only Next
+
+  
+      
+  .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
+    h2.form-signin-heading Join Smart Yelp
+    form.form-signin(method='post', action='/register')
       - for (var i = 0; i < schema.length; i++)
-        label() #{label[i]}
-        input(type='text', name='#{schema[i]}', value='') 
-        br
-      input(type='submit', value='Register')
-      br
-      
-      
-      
+        form-group
+          label() #{label[i]}
+          //label.col-md-4(value='#{label[i]}')
+          //.col-md-8
+          input.form-control(type='text', name='#{schema[i]}', value='',width = '50%') 
+      button.btn.btn-primary(type='submit') Sign Up
+s

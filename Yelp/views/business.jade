@@ -30,11 +30,12 @@ block left
             input(type='hidden', name='BUSINESS_CITY', value='#{business[0]["CITY"]}') 
             input(type='hidden', name='BUSINESS_STATE', value='#{business[0]["STATE"]}') 
             input(type='submit', value='Search in Bing')
-        .col-md-4
-          form(method='post', action='/favorite')
-            input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 
-            input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
-            input(type='submit', value='Add to my favorites')
+        - if (!is_favorate)
+          .col-md-4
+            form(method='post', action='/favorite')
+              input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 
+              input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
+              input(type='submit', value='Add to my favorites')
   .container  
     //Google map
     script(src="https://maps.googleapis.com/maps/api/js?v=3.exp")    
@@ -119,6 +120,6 @@ block content
 block bottom
   h3 
     span.label.label-info You may also like: 
-  p You may also like:
+  p 
       +extend_row_array(similar_business_list)
   

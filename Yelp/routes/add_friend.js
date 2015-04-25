@@ -19,6 +19,8 @@ function post(request, response) {
 				  'Location': '/user/' + stranger_id
 			});
 			response.end();		
+		} else {
+			console.log(err);
 		}
 	});
 }

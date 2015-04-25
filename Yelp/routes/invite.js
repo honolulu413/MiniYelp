@@ -4,7 +4,6 @@ var getPath = require('../lib/string').getPath;
 var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
 
 exports.post = function(req, res) {
-  // var row = requestQueryParser.parse(req, ["current_user", "friends_list"]);
   var userName = req.session.username;
   var batch = [];
   var userIDs = req.param('friends_list');
@@ -63,5 +62,4 @@ exports.post = function(req, res) {
       }
     });
   }
-
 };

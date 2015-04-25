@@ -72,7 +72,6 @@ function get(request, respond) {
 						for(var i = 0; i < similarBusinessList.length; i++) {
 							similarBusinessList[i].data[0] = '/business/' + similarBusinessList[i].data[0];
 						}
-						console.log("=============");
 						console.log(similarBusinessList);
 						
                         var businessList = [];

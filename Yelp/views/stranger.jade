@@ -1,7 +1,10 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
 include ./includes/row_list.jade
+include ./includes/header_for_page.jade
 extend layoutPage
+block header
+  +extend_pageheader(title)
 block left
   panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
@@ -17,21 +20,22 @@ block left
       input(type='hidden', name='current_user_id', value='#{current_user_id}') 
       input(type='hidden', name='stranger_id', value='#{stranger_id}') 
       input(type='submit', value='Add friend') 
-      
-  form(method='post', action='/user/send_message')
-    input(type='hidden', name='current_user_id', value='#{current_user_id}') 
-    input(type='hidden', name='stranger_id', value='#{stranger_id}') 
-    input(type='text', name='message', value='send message to your friend!') 
-    input(type='submit', value='send') 
 
+  - else   
+    form(method='post', action='/user/send_message')
+      input(type='hidden', name='current_user_id', value='#{current_user_id}') 
+      input(type='hidden', name='stranger_id', value='#{stranger_id}') 
+      input(type='text', name='message', value='send message to your friend!') 
+      input(type='submit', value='send') 
+
+    h1 Checkout your friend's favorite: 
+    +extend_row_array(business_list)
       
    
   br   
 
   // Put a click button that lets us return to the index page 
 block bottom
-  h1 Checkout your friend's favorite: 
-  +extend_row_array(business_list)
 
     
   

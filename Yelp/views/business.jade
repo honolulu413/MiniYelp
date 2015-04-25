@@ -2,8 +2,11 @@
 // Inherits from layoutPage
 
 include ./includes/row_list.jade
+include ./includes/header_for_page.jade
 
 extend layoutPage
+block header
+  +extend_pageheader(userName)
 block left
   panel.panel-info(style = "margin-bottom: 10px;")
     .panel-heading
@@ -116,6 +119,6 @@ block content
 block bottom
   h3 
     span.label.label-info You may also like: 
-  p You may also like:
+  p 
       +extend_row_array(similar_business_list)
   

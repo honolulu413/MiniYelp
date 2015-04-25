@@ -27,7 +27,6 @@ function get(request, respond) {
 						function(err, results) {
 							if (err === null) {
 								var currentUser = results[0];
-								var queryBatch = [];
 
 								console.log("current user is:"
 										+ currentUser.USER_NAME_ID);
@@ -35,9 +34,10 @@ function get(request, respond) {
 								var favoriteBuziQuery = "SELECT * FROM BUSINESSES WHERE BUSINESSES.BUSINESS_ID IN "
 										+ "( SELECT BUSINESS_ID FROM FAVORITES WHERE USER_NAME_ID = "
 										+ "'" + userName + "')";
-								var friendsQuery = "SELECT * FROM APP_USERS WHERE USER_NAME_ID IN ( SELECT USER_NAME_ID2 "
+
+								var friendsQuery = "SELECT * FROM APP_USERS WHERE USER_NAME_ID IN (( SELECT USER_NAME_ID2 "
 										+ "FROM APP_USER_FRIENDS WHERE USER_NAME_ID1 = "
-										+ "'" + userName + "')";
+										+ "'" + userName + "')" + " UNION " + "( SELECT USER_NAME_ID1 " + "FROM APP_USER_FRIENDS WHERE USER_NAME_ID2 = " + "'" + userName + "'))";;
 								
 								async.parallel(	[
 								               	 recommend_similar_user.getTask(currentUser),

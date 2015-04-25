@@ -3,11 +3,9 @@ var database = require('../lib/database');
 var getPath = require('../lib/string').getPath;
 
 exports.post = function(req, res) {
-  // var row = requestQueryParser.parse(req, ["current_user", "friends_list"]);
   var userName = req.session.username;
   var batch = [];
   var userIDs = req.param('friends_list');
-  console.log("============="+"++++++++++++++++++++++++++++++++++");
   if (typeof userIDs !== 'undefined') {
     var num = userIDs.length;
     for ( var i = 0; i < userIDs.length; i++) {
@@ -58,5 +56,4 @@ exports.post = function(req, res) {
       }
     });
   }
-
 };

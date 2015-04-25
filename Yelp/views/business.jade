@@ -2,8 +2,11 @@
 // Inherits from layoutPage
 
 include ./includes/row_list.jade
+include ./includes/header_for_page.jade
 
 extend layoutPage
+block header
+  +extend_pageheader(userName)
 block left
   panel.panel-info(style = "margin-bottom: 10px;")
     .panel-heading

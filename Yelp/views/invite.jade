@@ -1,4 +1,9 @@
+include ./includes/header_for_page.jade
+
 extend layoutSimple
+block header
+  +extend_pageheader(userName)
+  
 block content
   h1 You may want to go to:
   // Put a click button that lets us return to the index page h1 #{title}:

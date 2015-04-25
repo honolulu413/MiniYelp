@@ -10,7 +10,6 @@ var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
 function get(request, respond) {
 	var userName = getPath(request.params[0]);
 
-	var currentUser;
 
 	if (!alphanumeric(userName)) {
 		respond.redirect('/login');

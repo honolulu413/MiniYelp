@@ -2,7 +2,8 @@ doctype html
 html
   include ./includes/head.jade
   body
-    include ./includes/header.jade
+    block header
+      include ./includes/header.jade
     //h4 Here is outside of container
     .container-fluid
       //h4 Inside container

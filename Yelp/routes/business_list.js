@@ -8,14 +8,15 @@ var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
 function get(request, respond) {
 	var url_parts = require('url').parse(request.url, true);
 	var query = url_parts.query;
-	var rowQuery = object2Row(query);
+	var rowQuery = object2Row(query);    
+    var userName = request.session.username;
 	
 	// clean data
 	if (!BUSINESSES.checkLegalData(rowQuery)) {
 		console.log("data invalid!");
 		return;
 	}
-		
+
 	database.lowerSelect(BUSINESSES, rowQuery, function(err, results) {
 		if(err === null) {
 			var businessList = rowArrayWithLabel(results.slice(0, 10), ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
@@ -25,6 +26,7 @@ function get(request, respond) {
 			}
 
 			respond.render('business_list.jade', {
+			    userName : userName,
 				title : BUSINESSES.name,
 				business_list : businessList,
 				detalLink : null

@@ -1,4 +1,4 @@
-#header
+mixin extend_pageheader(username)
   h1 Smart Yelp
   nav.navbar.navbar-default(role="navigation")
     .container.fluid
@@ -10,5 +10,5 @@
          span.icon-bar
       div.collapse.navbar-collapse
         ul.nav.navbar-nav
-          li: a(href='/user/#{title}') HomePage
+          li: a(href='/user/#{username}') HomePage
        

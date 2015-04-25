@@ -3,18 +3,23 @@
 extend layoutSimple
 // Then we produce a form that triggers /actor once
 // the user hits Submit
+block header
+  .navbar.navbar-inverse.navbar-static-top(role='navigation')
+    .container.fluid
+      .navbar-header
+        .navbar-brand
+          //img(src='/images/logo.jpg', alt='logo')
+       form.navbar-form.navbar-right(method="post", id="loginForm")
+        .form-group
+          input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
+        .form-group
+          input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
+        button.btn.btn-primary(type='submit') Sign in
 block content
 
   - if(typeof message !== 'undefined')
     .alert.alert-warning(role='alert')
       p #{message}
-  .contatiner(style = "padding: 15px;margin: 0 auto;")  
-    form.form-inline(method="post", id="loginForm")
-      .form-group
-        input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
-      .form-group
-        input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
-      button.btn.btn-primary(type='submit') Sign in
       
   .container(style = "width = 500px; height = 350px")     
     #myCarousel.carousel.slide(data-ride='carousel')

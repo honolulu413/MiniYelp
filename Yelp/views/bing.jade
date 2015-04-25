@@ -1,22 +1,10 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
-extend layoutSimple
-block content
+include ./includes/header_for_page.jade
+include ./includes/row_list.jade
 
-  //Similar User
-  p
-    | Top #{searchResults.length} search results by Bing
-    br
-    br
-  - for (var i = 0; i < searchResults.length; i++)
-    a(href=searchResults[i]["Url"]) Result#{i+1}:    
-    br  
-    br      
-    | Title: &nbsp #{searchResults[i]["Title"]}
-    br 
-    br
-    | Description: &nbsp #{searchResults[i]["Description"]}
-    br 
-    br
-    br 
-      
+extend layoutSimple
+block header
+  +extend_pageheader(userName)
+block content
+  +extend_row_array(searchResults)

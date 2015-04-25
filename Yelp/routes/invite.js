@@ -1,6 +1,7 @@
 var requestQueryParser = require('../lib/requestQueryParser');
 var database = require('../lib/database');
 var getPath = require('../lib/string').getPath;
+var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
 
 exports.post = function(req, res) {
   var userName = req.session.username;
@@ -49,9 +50,14 @@ exports.post = function(req, res) {
           sortedBusiness.push(business);
         }
         console.log(sortedBusiness);
+        var businessList = rowArrayWithLabel(sortedBusiness, ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
+        // adjust business url format
+        for(var i = 0; i < businessList.length; i++) {
+            businessList[i].data[0] = '/business/' + businessList[i].data[0];
+        }
         res.render('invite.jade', {
           'userName':userName,
-          'business_list' : sortedBusiness
+          'business_list' : businessList
         });
       }
     });

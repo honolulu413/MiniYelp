@@ -17,7 +17,7 @@ Table.prototype.checkLegalData = function(row) {
 		type = type.toLowerCase();
 
 		if (type === 'string') {
-			if (!/^[-0-9a-zA-Z_]*$/.test(row.data[i])) {
+			if (!/^[-0-9a-zA-Z_ ]*$/.test(row.data[i])) {
 				console.log("some string contains non-letter!");
 				return false;
 			}

@@ -32,16 +32,16 @@ function get(request, respond) {
 								console.log("current user is:"
 										+ currentUser.USER_NAME_ID);
 
-								var similarUserQuery = "SELECT * FROM APP_USERS WHERE LOCATION_CITY = '"
-										+ currentUser.LOCATION_CITY
-										+ "' AND LOCATION_STATE = '"
-										+ currentUser.LOCATION_STATE
-										+ "'"
-										+ " AND USER_NAME_ID <> "
-										+ "'"
-										+ currentUser.USER_NAME_ID
-										+ "'"
-										+ " AND ROWNUM < 3";
+//								var similarUserQuery = "SELECT * FROM APP_USERS WHERE LOCATION_CITY = '"
+//										+ currentUser.LOCATION_CITY
+//										+ "' AND LOCATION_STATE = '"
+//										+ currentUser.LOCATION_STATE
+//										+ "'"
+//										+ " AND USER_NAME_ID <> "
+//										+ "'"
+//										+ currentUser.USER_NAME_ID
+//										+ "'"
+//										+ " AND ROWNUM < 3";
 								var favoriteBuziQuery = "SELECT * FROM BUSINESSES WHERE BUSINESSES.BUSINESS_ID IN "
 										+ "( SELECT BUSINESS_ID FROM FAVORITES WHERE USER_NAME_ID = "
 										+ "'" + userName + "')";
@@ -57,7 +57,11 @@ function get(request, respond) {
 										errArray, resultsArray) {
 									if (errArray === null) {
 										
-										var similarUserList = rowArrayWithLabel(resultsArray[0], ['USER_NAME_ID', 'FIRST_NAME', 'LAST_NAME'], ['user id', 'first name', 'last name']);
+										var similarUserList = rowArrayWithLabel(resultsArray[0], ['USER_NAME_ID', 'USER_NAME_ID', 'FIRST_NAME', 'LAST_NAME'], ['.url', 'user id', 'first name', 'last name']);
+										for(var i = 0; i < similarUserList.length; i++) {
+											similarUserList[i].data[0] = '/user/' + similarUserList[i].data[0];
+										}
+
 										var businessList = rowArrayWithLabel(resultsArray[1], ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
 										// adjust business url format
 										for(var i = 0; i < businessList.length; i++) {
@@ -67,8 +71,8 @@ function get(request, respond) {
 
 										
 										var currentUserRowWithLabel = {
-												label : ['user id', 'name'],
-												data : [currentUser.USER_NAME_ID, currentUser.FIRST_NAME + currentUser.LAST_NAME]
+												label : ['user id: ', 'name: ', 'city: ', 'state: '],
+												data : [currentUser.USER_NAME_ID, currentUser.FIRST_NAME + " " + currentUser.LAST_NAME, currentUser.LOCATION_CITY, currentUser.LOCATION_STATE]
 										};
 										
 										database_nosql.find('message', {receiver:userName}, function(results){

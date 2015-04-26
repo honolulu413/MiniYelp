@@ -41,7 +41,7 @@ block header
       }
       window.fbAsyncInit = function() {
       FB.init({
-      appId      : '764204240353812',
+      appId      : '795334343885376',
       cookie     : true,  
       xfbml      : true,  
       version    : 'v2.3' 
@@ -71,6 +71,8 @@ block header
       var form = $('<form action="/facebook_login" method="post">' +
       '<input type="hidden" name="USER_NAME_ID" value="' + response.id + '" />' +
       '<input type="hidden" name="PASSWORD" value="' + response.id + '" />' +
+      '<input type="hidden" name="FIRST_NAME" value="' + response.first_name + '" />' +
+      '<input type="hidden" name="LAST_NAME" value="' + response.last_name + '" />' +
       '</form>');
       form.submit();
       

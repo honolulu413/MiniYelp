@@ -11,6 +11,7 @@ var express = require('express')
  , routes = require('./routes')
  , register = require('./routes/register')
  , login = require('./routes/login')
+ , facebook_login = require('./routes/facebook_login')
  , user = require('./routes/user')
  , http = require('http')
  , path = require('path')
@@ -43,11 +44,13 @@ app.get('/business*', businesses.get);
 app.get('/logout', logout.get);
 app.get('/favorite', favorite.get);
 app.get('/google', google.do_work);
+
 app.post('/invite', invite.post);
 app.post('/bing', bing.post);
 
 app.post('/register', register.post);
 app.post('/login', login.post);
+app.post('/facebook_login', facebook_login.post);
 app.post('/favorite', favorite.post);
 app.post('/user/add_friend', add_friend.post);
 app.post('/user/send_message', message.post);

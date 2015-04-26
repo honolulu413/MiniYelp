@@ -41,7 +41,7 @@ app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
 app.get('/logout', logout.get);
 app.get('/favorite', favorite.get);
-app.get('/signup',signup.get);
+app.get('/signup',signup.do_work);
 app.post('/invite', invite.post);
 app.post('/bing', bing.post);
 

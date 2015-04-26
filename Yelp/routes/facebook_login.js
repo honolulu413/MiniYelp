@@ -25,10 +25,17 @@ function post(request, response) {
 				});
 				response.end();		
 			} else {
-				response.render('login.jade', {
-					message: 'Incorrect username and password combination',
-					schema: APP_USERS.schema,
-					label: APP_USERS.label
+				// sign up
+				database.insert(APP_USERS, row, function(err, results) {
+					if (err === null) {
+						// successfully log in. redirect to homepage
+						request.session.username = getData(row, "USER_NAME_ID");
+
+						response.writeHead(302, {
+							  'Location': '/user/' + getData(row, 'USER_NAME_ID')
+						});
+						response.end();		
+					}
 				});
 			}
 		}
@@ -38,10 +45,11 @@ function post(request, response) {
 
 
 exports.post = post;
-exports.get = function(req, res){
+exports.do_work = function(req, res){
 	  res.render('login.jade', { 
 		  title: 'hello',
 		  schema: APP_USERS.schema,
 		  label: APP_USERS.label
 	  });
 	};
+

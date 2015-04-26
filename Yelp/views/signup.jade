@@ -1,0 +1,21 @@
+extend layoutSimple
+
+block content
+  .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
+    h2.form-signup-heading Welcome to Smart Yelp
+    form.form-signup(method='post', action='/register')
+      .form-group
+          input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
+      .form-group
+          input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
+      .form-group
+          input.form-control(name="CONFIRM_PASSWORD",type = "Password", placeholder = "Password")
+      .form-group
+          input.form-control(name="FIRST_NAME", type = "text", placeholder="First Name")
+      .form-group
+          input.form-control(name="LAST_NAME",type = "text", placeholder = "Last Name")
+      .form-group
+          input.form-control(name="LOCATION_CITY", type = "text", placeholder="City")
+      .form-group
+          input.form-control(name="LOCATION_STATE",type = "text", placeholder = "State")
+      button.btn.btn-primary(type='submit') Submit

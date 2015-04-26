@@ -1,8 +1,9 @@
 // Jade file to specify output of an actors list
 // Inherits from layout
-extend layoutSimple
-block content
+include ./includes/header_for_page.jade
+include ./includes/row_list.jade
 
+<<<<<<< HEAD
 
   p
     | Top #{searchResults.length} search results by Bing
@@ -20,3 +21,10 @@ block content
     br
     br 
       
+=======
+extend layoutSimple
+block header
+  +extend_pageheader(userName)
+block content
+  +extend_row_array(searchResults)
+>>>>>>> branch 'master' of https://github.com/sylsgl/550.git

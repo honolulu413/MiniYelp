@@ -1,5 +1,7 @@
 var acctKey = 'UBlqBGw8Ex3KxCeFgjh21Wv81/dCV9QX9OFZRKtA+DM';
 var rootUri = 'https://api.datamarket.azure.com/Bing/Search';
+var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
+
 var auth    = new Buffer([ acctKey, acctKey ].join(':')).toString('base64');
 var request = require('request').defaults({
   headers : {
@@ -12,6 +14,7 @@ exports.post = function(req, res){
 	var businessName = req.param('BUSINESS_NAME');
 	var city = req.param('BUSINESS_CITY');
 	var state = req.param('BUSINESS_STATE');
+	  var userName = req.session.username;
 	
 		  var service_op  = 'Web';
 		  var query = businessName + ' ' + city + ' ' + state;
@@ -33,8 +36,15 @@ exports.post = function(req, res){
 				      return res.send(500, response.body);
 			    }
 			    var results = JSON.parse(response.body);
+			    console.log("=============================");
+			    var businessList = rowArrayWithLabel(results.d.results, ['Url',  'Title', 'Description'], ['.url', 'name', 'description']);
+	              console.log(businessList);
+
+			    // adjust business url format
+		     
 				res.render('bing.jade', {
-					searchResults : results.d.results
+					searchResults : businessList,
+					userName : userName
 				});
 			    
 //			    res.send(results.d.results);

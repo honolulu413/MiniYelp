@@ -15,7 +15,6 @@ block header
         .form-group
           input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
         button.btn.btn-primary(type='submit') Sign in
-block content
   //facebook login
   p
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
@@ -87,6 +86,7 @@ block content
 
 
 
+block content
 
   - if(typeof message !== 'undefined')
     .alert.alert-warning(role='alert')

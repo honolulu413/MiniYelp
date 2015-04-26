@@ -1,0 +1,9 @@
+extend layoutSimple
+
+block content
+
+  .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
+    h2.form-signin-heading Join Smart Yelp
+    form.form-signin(method='post', action='/register')
+      input.form-control(type='text', name='#{schema[i]}', value='',width = '50%') 
+      button.btn.btn-primary(type='submit') Submit

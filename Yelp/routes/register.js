@@ -14,7 +14,7 @@ function post (request, respond) {
 	database.exist(APP_USERS, rowPost, function(err, results) {
 		if (err !== null) {
 			console.log("server error");
-			respond.render('login.jade', { 
+			respond.render('signup.jade', { 
 				message: 'something bad happend..',
 				  schema: APP_USERS.schema,
 				  label: APP_USERS.label
@@ -38,7 +38,7 @@ function post (request, respond) {
 			} else {
 				// duplicate name. 
 				console.log("fail to register");
-				respond.render('login.jade', { 
+				respond.render('signup.jade', { 
 					  message: 'fail to register. please choose another name',
 					  schema: APP_USERS.schema,
 					  label: APP_USERS.label

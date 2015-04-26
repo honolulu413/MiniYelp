@@ -9,12 +9,13 @@ block header
       .navbar-header
         .navbar-brand
           //img(src='/images/logo.jpg', alt='logo')
-       form.navbar-form.navbar-right(method="post", id="loginForm")
+      form.navbar-form.navbar-right(method="post", id="loginForm")
         .form-group
           input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
         .form-group
           input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
         button.btn.btn-primary(type='submit') Sign in
+        a.button.btn.btn-primary(href='/signup') Sign Up  
 block content
 
   - if(typeof message !== 'undefined')
@@ -45,17 +46,3 @@ block content
         span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
                
         span.sr-only Next
-
-  
-      
-  .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
-    h2.form-signin-heading Join Smart Yelp
-    form.form-signin(method='post', action='/register')
-      - for (var i = 0; i < schema.length; i++)
-        form-group
-          label() #{label[i]}
-          //label.col-md-4(value='#{label[i]}')
-          //.col-md-8
-          input.form-control(type='text', name='#{schema[i]}', value='',width = '50%') 
-      button.btn.btn-primary(type='submit') Sign Up
-s

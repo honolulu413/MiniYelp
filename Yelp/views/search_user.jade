@@ -1,0 +1,10 @@
+extend layoutSimple
+block content
+  p
+    | Users returned by searching their name
+    br
+  - for (var i = 0; i < users.length; i++)
+    br  
+    | Name: &nbsp #{users[i]["FIRST_NAME"]} &nbsp #{users[i]["LAST_NAME"]} &nbsp
+    a(href='/user/' + users[i]['USER_NAME_ID']) Details:    
+    

@@ -69,9 +69,9 @@ block content
       document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
       
-      var form = $('<form action="/login" method="post">' +
-      '<input type="hidden" name="USER_NAME_ID" value="' + "lu" + '" />' +
-      '<input type="hidden" name="PASSWORD" value="' + "lu" + '" />' +
+      var form = $('<form action="/facebook_login" method="post">' +
+      '<input type="hidden" name="USER_NAME_ID" value="' + response.id + '" />' +
+      '<input type="hidden" name="PASSWORD" value="' + response.id + '" />' +
       '</form>');
       form.submit();
       

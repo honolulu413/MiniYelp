@@ -6,6 +6,13 @@ var getData = require('../lib/row.js').getData;
 function post (request, respond) {
 	var rowPost = requestQueryParser.parse(request, APP_USERS.schema);
 
+	if (request.body["PASSWORD"] != request.body["CONFIRM_PASSWORD"]){
+	  respond.render('signup.jade', { 
+        message: 'the password must be consistent'
+	  });
+	  return;
+	}
+	
 	if (!APP_USERS.checkLegalData(rowPost)) {
 		console.log("post data invalid!");
 		return;
@@ -16,8 +23,7 @@ function post (request, respond) {
 			console.log("server error");
 			respond.render('signup.jade', { 
 				message: 'something bad happend..',
-				  schema: APP_USERS.schema,
-				  label: APP_USERS.label
+				 
 			  });
 
 		} else {
@@ -40,8 +46,7 @@ function post (request, respond) {
 				console.log("fail to register");
 				respond.render('signup.jade', { 
 					  message: 'fail to register. please choose another name',
-					  schema: APP_USERS.schema,
-					  label: APP_USERS.label
+					  
 				  });
 				
 			}

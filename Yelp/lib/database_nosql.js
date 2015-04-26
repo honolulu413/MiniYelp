@@ -13,7 +13,6 @@ function connect(callback) {
 	});
 }
 
-
 function insertDocuments(collectionName, document, callback) {
 	connect(function(db){
 		// Get the documents collection

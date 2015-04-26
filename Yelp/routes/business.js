@@ -2,6 +2,8 @@ var database = require('../lib/database');
 var BUSINESSES = require('../lib/table').BUSINESSES;
 var getPath = require('../lib/string').getPath;
 var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
+var recommend_similar_business = require('../lib/recommend/recommend_similar_business');
+var async = require('async');
 
 function get(request, respond) {
 
@@ -20,12 +22,12 @@ function get(request, respond) {
             data : [ businessID ]
         }, function(err, results) {
             if (err === null) {
+
                 businessInfo = results[0];
                 businessTitle = businessInfo["NAME"];
                 businessCity = businessInfo["CITY"];
                 businessState = businessInfo["STATE"];
-                var batchQuery = [];
-                
+                                
                 var goodReview = "SELECT * FROM (SELECT * FROM REVIEWS WHERE REVIEWS.STAR>=4 AND REVIEWS.BUSINESS_ID="
                         + "'" + businessID + "'"
                         + " ORDER BY REVIEWS.USEFUL_VOTE_NUMBER DESC) WHERE ROWNUM<=3";
@@ -33,22 +35,26 @@ function get(request, respond) {
                 var badReview = "SELECT * FROM (SELECT *FROM REVIEWS WHERE REVIEWS.STAR<=3 AND REVIEWS.BUSINESS_ID="
                         + "'" + businessID + "'"
                         + " ORDER BY REVIEWS.USEFUL_VOTE_NUMBER DESC) WHERE ROWNUM<=3";
-                
-                var similarBusinesses = "SELECT * FROM ( SELECT * FROM BUSINESSES WHERE BUSINESS_ID IN ( SELECT BUSINESS_ID " +
-                        "FROM BUSINESS_CATEGORIES WHERE CATEGORY IN ( SELECT CATEGORY FROM BUSINESS_CATEGORIES WHERE " +
-                        "BUSINESS_ID = " + "'" + businessID + "'" + " ) ) AND CITY = " + "'" + businessCity + "'" +" AND " +
-                                "STATE= " + "'" + businessState + "'"  + " ORDER BY STAR DESC) WHERE ROWNUM <=3";
-                
+                                
                 var favorateBusinessQuery = " SELECT * FROM FAVORITES  " +
                 					" WHERE USER_NAME_ID = '" + currentUser + "' " + 
                 					" AND BUSINESS_ID = '" +  businessID + "' ";
-                batchQuery.push(goodReview);
-                batchQuery.push(badReview);
-                batchQuery.push(similarBusinesses);
-                batchQuery.push(favorateBusinessQuery);
+                
+                
+            	async.parallel([function(callback) {
+            		database.execute(goodReview, callback);
+            	},
+            	function(callback) {
+            		database.execute(badReview, callback);
+            	},
+            	recommend_similar_business.getTask(null, businessInfo),
+            	function(callback) {
+            		database.execute(favorateBusinessQuery, callback);
+            	}
+            	],
+            	function(err, resultsArray) {
 
-                database.executeBatch(batchQuery, function(err, resultsArray) {
-                    if (err === null) {
+                    if (err == null) {
                     	var similarBusinessList = rowArrayWithLabel(resultsArray[2], ['BUSINESS_ID',  'NAME', 'FULL_ADDRESS', 'CITY', 'STAR'], ['.url', 'name', 'address', 'city', 'star']);
                     	// adjust business url format
 						for(var i = 0; i < similarBusinessList.length; i++) {
@@ -75,7 +81,7 @@ function get(request, respond) {
                         });
                         
                     }
-                }); 
+            	});            	
             }
         });
  

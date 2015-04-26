@@ -9,7 +9,7 @@ block content
     .alert.alert-warning(role='alert')
       p #{message}
   .contatiner(style = "padding: 15px;margin: 0 auto;")  
-    form.form-inline(method="post", id="loginForm")
+    form.form-inline(method="post", action = '/login', id="loginForm")
       .form-group
         input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
       .form-group

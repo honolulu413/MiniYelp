@@ -8,10 +8,10 @@ var getData = require('../lib/row').getData;
 var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
 
 function get(request, respond) {
+	
 	var userName = getPath(request.params[0]);
-
-
-	if (!alphanumeric(userName)) {
+	
+	if (!alphanumeric(userName) || (userName == 'undefined')) {
 		respond.redirect('/login');
 		return;
 	}
@@ -31,16 +31,16 @@ function get(request, respond) {
 								console.log("current user is:"
 										+ currentUser.USER_NAME_ID);
 
-//								var similarUserQuery = "SELECT * FROM APP_USERS WHERE LOCATION_CITY = '"
-//										+ currentUser.LOCATION_CITY
-//										+ "' AND LOCATION_STATE = '"
-//										+ currentUser.LOCATION_STATE
-//										+ "'"
-//										+ " AND USER_NAME_ID <> "
-//										+ "'"
-//										+ currentUser.USER_NAME_ID
-//										+ "'"
-//										+ " AND ROWNUM < 3";
+								var similarUserQuery = "SELECT * FROM APP_USERS WHERE LOCATION_CITY = '"
+										+ currentUser.LOCATION_CITY
+										+ "' AND LOCATION_STATE = '"
+										+ currentUser.LOCATION_STATE
+										+ "'"
+										+ " AND USER_NAME_ID <> "
+										+ "'"
+										+ currentUser.USER_NAME_ID
+										+ "'"
+										+ " AND ROWNUM < 3";
 								var favoriteBuziQuery = "SELECT * FROM BUSINESSES WHERE BUSINESSES.BUSINESS_ID IN "
 										+ "( SELECT BUSINESS_ID FROM FAVORITES WHERE USER_NAME_ID = "
 										+ "'" + userName + "')";

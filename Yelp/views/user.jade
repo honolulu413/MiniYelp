@@ -4,6 +4,20 @@
 include ./includes/row_list.jade
 extend layout
 block left
+  //Search users by ID
+  panel.panel-success(style = "margin-bottom: 10px;")
+    .panel-heading
+      .panel-title 
+         | Search Users by First or Last Name!
+         br
+    .page-body
+      form(method='get', action='/search_user')
+        input(type='text', name='stranger_id') 
+        br
+        br
+        button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Search     
+ 
+        
   panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title 

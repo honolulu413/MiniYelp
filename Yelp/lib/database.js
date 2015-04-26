@@ -237,6 +237,12 @@ function adjustTypeFormat(table, row) {
 	return newRow;
 }
 
+function getTask(sql) {
+	return function(callback) {
+		database.execute(sql, callback);			
+	}
+}
+
 
 exports.execute = execute;
 exports.executeBatch = executeBatch;

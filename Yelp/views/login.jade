@@ -3,6 +3,18 @@
 extend layoutSimple
 // Then we produce a form that triggers /actor once
 // the user hits Submit
+block header
+  .navbar.navbar-inverse.navbar-static-top(role='navigation')
+    .container.fluid
+      .navbar-header
+        .navbar-brand
+          //img(src='/images/logo.jpg', alt='logo')
+       form.navbar-form.navbar-right(method="post", action="/login", id="loginForm")
+        .form-group
+          input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
+        .form-group
+          input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
+        button.btn.btn-primary(type='submit') Sign in
 block content
   //facebook login
   p
@@ -79,13 +91,6 @@ block content
   - if(typeof message !== 'undefined')
     .alert.alert-warning(role='alert')
       p #{message}
-  .contatiner(style = "padding: 15px;margin: 0 auto;")  
-    form.form-inline(method="post", id="loginForm")
-      .form-group
-        input.form-control(name="USER_NAME_ID", type = "text", placeholder="User Name")
-      .form-group
-        input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
-      button.btn.btn-primary(type='submit') Sign in
       
   .container(style = "width = 500px; height = 350px")     
     #myCarousel.carousel.slide(data-ride='carousel')
@@ -97,11 +102,11 @@ block content
       // Wrapper for slides
       .carousel-inner(role='listbox')
         .item.active
-          img(src='/images/hotpot.jpg', alt='hotpot', width='700', height='280', style = 'width: 70%; margin: auto;')
+          img(src='/images/rsz_hotpot.jpg', alt='hotpot', max-width='500', max-height='250', style = 'width: 70%; margin: auto;')
         .item
-          img(src='/images/sushi.jpg', alt='sushi', width='700', height='280', style = 'width: 70%; margin: auto;')
+          img(src='/images/rsz_sushi.jpg', alt='sushi', max-width='500', max-height='250', style = 'width: 70%; margin: auto;')
         .item
-          img(src='/images/desert.jpg', alt='desert', width='700', height='280', style = 'width: 70%; margin: auto;')
+          img(src='/images/rsz_desert.jpg', alt='desert', max-width='500', max-height='250', style = 'width: 70%; margin: auto;')
       a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
         span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
                

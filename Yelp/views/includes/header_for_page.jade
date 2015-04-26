@@ -1,6 +1,5 @@
-#header
-  h1 Smart Yelp
-  nav.navbar.navbar-default(role="navigation")
+mixin extend_pageheader(username)
+  nav.navbar.navbar-inverse.navbar-static-tops(role="navigation")
     .container.fluid
       .navbar-header
         button.navbar-toggle(type="button" data-toggle="collapse" data-target="navbar-collapse")
@@ -9,6 +8,6 @@
          span.icon-bar
          span.icon-bar
       div.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li: a(href='/user/#{name}') HomePage
+        ul.nav.nav-pills
+          li: a(href='/user/#{username}') HomePage
        

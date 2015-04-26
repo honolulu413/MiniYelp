@@ -1,6 +1,6 @@
 mixin extend_row(row)
   - for (var i = 0; i < row.label.length; i++)
-    li #{row.label[i]}  #{row.data[i]}
+    li #{row.label[i]}: #{row.data[i]}
 
 mixin extend_row_array(row_array)
   - if(row_array !== null && row_array !== undefined && row_array.length > 0)
@@ -20,6 +20,4 @@ mixin extend_row_array(row_array)
             - for (var j = 0; j < row.label.length; j++)
               - if (row.label[j] == '.url')
                 td
-                  a(href=row.data[j]) details
-                
-                
+                  a(href=row.data[j]) details         

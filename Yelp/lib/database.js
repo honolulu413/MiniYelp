@@ -11,6 +11,7 @@ var oracle =  require("oracle");
 	
 function execute(sql, handleResults) {
   console.log("about to execute sql:" + sql);
+  var t = Date.now();
   oracle.connect(connectData, function(err, connection) {
     if ( err ) {
     	handleResults(err, null);
@@ -23,6 +24,9 @@ function execute(sql, handleResults) {
 	  	    	console.log(err);
 	  	    	handleResults(err, null);
 	  	    } else {
+	  	    	console.log("time -----------");
+	  	    	console.log(Date.now());
+	  	    	console.log( Date.now() - t);
 	  	    	handleResults(null, results);
 	  	    	connection.close(); // done with the connection
 	  	    }

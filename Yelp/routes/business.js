@@ -27,9 +27,7 @@ function get(request, respond) {
                 businessTitle = businessInfo["NAME"];
                 businessCity = businessInfo["CITY"];
                 businessState = businessInfo["STATE"];
-                
-//                var batchQuery = [];
-                
+                                
                 var goodReview = "SELECT * FROM (SELECT * FROM REVIEWS WHERE REVIEWS.STAR>=4 AND REVIEWS.BUSINESS_ID="
                         + "'" + businessID + "'"
                         + " ORDER BY REVIEWS.USEFUL_VOTE_NUMBER DESC) WHERE ROWNUM<=3";
@@ -37,12 +35,7 @@ function get(request, respond) {
                 var badReview = "SELECT * FROM (SELECT *FROM REVIEWS WHERE REVIEWS.STAR<=3 AND REVIEWS.BUSINESS_ID="
                         + "'" + businessID + "'"
                         + " ORDER BY REVIEWS.USEFUL_VOTE_NUMBER DESC) WHERE ROWNUM<=3";
-                
-//                var similarBusinesses = "SELECT * FROM ( SELECT * FROM BUSINESSES WHERE BUSINESS_ID IN ( SELECT BUSINESS_ID " +
-//                        "FROM BUSINESS_CATEGORIES WHERE CATEGORY IN ( SELECT CATEGORY FROM BUSINESS_CATEGORIES WHERE " +
-//                        "BUSINESS_ID = " + "'" + businessID + "'" + " ) ) AND CITY = " + "'" + businessCity + "'" +" AND " +
-//                                "STATE= " + "'" + businessState + "'"  + " ORDER BY STAR DESC) WHERE ROWNUM <=3";
-                
+                                
                 var favorateBusinessQuery = " SELECT * FROM FAVORITES  " +
                 					" WHERE USER_NAME_ID = '" + currentUser + "' " + 
                 					" AND BUSINESS_ID = '" +  businessID + "' ";
@@ -88,15 +81,7 @@ function get(request, respond) {
                         });
                         
                     }
-            	});
-            	
-            	
-//            	batchQuery.push(goodReview);
-//                batchQuery.push(badReview);
-//                batchQuery.push(similarBusinesses);
-//                batchQuery.push(favorateBusinessQuery);
-//
-//                database.executeBatch(batchQuery, function(err, resultsArray) {}); 
+            	});            	
             }
         });
  

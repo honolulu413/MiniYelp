@@ -77,6 +77,11 @@ block left
       google.maps.event.addDomListener(window, 'load', initialize);
     p
       #googleMap(style="width:500px; height:380px;")
+      form(method='get', action='/google')
+        input(type='hidden', name='LATITUDE', value='#{business[0].LATITUDE}') 
+        input(type='hidden', name='LONGITUDE', value='#{business[0].LONGITUDE}') 
+        input(type='text', name='address', placeholder="My current address") 
+        input(type='submit', value='Search')
     //Google map
    
 

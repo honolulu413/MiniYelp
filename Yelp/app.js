@@ -23,6 +23,8 @@ var express = require('express')
  , invite = require('./routes/invite')
  , add_friend = require('./routes/add_friend')
  , message = require('./routes/message')
+ , google = require('./routes/google')
+ , facebook = require('./routes/facebook')
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');
@@ -40,7 +42,7 @@ app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
 app.get('/logout', logout.get);
 app.get('/favorite', favorite.get);
-
+app.get('/google', google.do_work);
 app.post('/invite', invite.post);
 app.post('/bing', bing.post);
 
@@ -49,6 +51,8 @@ app.post('/login', login.post);
 app.post('/favorite', favorite.post);
 app.post('/user/add_friend', add_friend.post);
 app.post('/user/send_message', message.post);
+app.get('/facebook', facebook.do_work);
+
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function() {

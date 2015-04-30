@@ -8,7 +8,7 @@ function post (request, respond) {
 
 	if (request.body["PASSWORD"] != request.body["CONFIRM_PASSWORD"]){
 	  respond.render('signup.jade', { 
-        message: 'the password must be consistent'
+        message: 'The password must be consistent'
 	  });
 	  return;
 	}

@@ -27,6 +27,7 @@ var express = require('express')
  , message = require('./routes/message')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
+
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');
@@ -48,6 +49,7 @@ app.get('/signup',signup.do_work);
 app.get('/google', google.do_work);
 app.post('/invite', invite.post);
 app.post('/bing', bing.post);
+
 
 app.post('/register', register.post);
 app.post('/login', login.post);

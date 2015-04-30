@@ -1,6 +1,8 @@
 mixin extend_row(row)
-  - for (var i = 0; i < row.label.length; i++)
-    li #{row.label[i]}: #{row.data[i]}
+  ul.list-group
+    - for (var i = 0; i < row.label.length; i++)
+      li.list-group-item 
+        p #{row.label[i]} #{row.data[i]}
 
 mixin extend_row_array(row_array)
   - if(row_array !== null && row_array !== undefined && row_array.length > 0)

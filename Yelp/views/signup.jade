@@ -1,6 +1,10 @@
 extend layoutSimple
 
 block content
+  - if(typeof message !== 'undefined')
+    .alert.alert-warning(role='alert')
+      p #{message}
+      
   .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
     h2.form-signup-heading Welcome to Smart Yelp
     form.form-signup(method='post', action='/register')
@@ -9,7 +13,7 @@ block content
       .form-group
           input.form-control(name="PASSWORD",type = "Password", placeholder = "Password")
       .form-group
-          input.form-control(name="CONFIRM_PASSWORD",type = "Password", placeholder = "Password")
+          input.form-control(name="CONFIRM_PASSWORD",type = "Password", placeholder = "Confirm Password")
       .form-group
           input.form-control(name="FIRST_NAME", type = "text", placeholder="First Name")
       .form-group

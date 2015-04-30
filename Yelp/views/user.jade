@@ -4,21 +4,19 @@
 include ./includes/row_list.jade
 extend layout
 block left
-  panel.panel-success(style = "margin-bottom: 10px;")
+  panel.panel-success(style = "margin-bottom: 60px; margin-top: 100px;")
     .panel-heading
       .panel-title 
         a#account #{title}
     .page-body
-    ul
       +extend_row(current_user)
-
       br   
       +extend_row_array(message)
    
-  panel.panel-danger(style = "margin-bottom: 10px;")
+  panel.panel-danger(style = "margin-bottom: 60px; margin-top: 100px;")
     .panel-heading
       .panel-title 
-        a#friends Start a Party
+        a#friends Friends
     .page-body
       - if((typeof friends_list !== 'undefined') && (friends_list.length != [[]]))
           form(method='post', action='/invite')
@@ -28,12 +26,11 @@ block left
                   | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
                   a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
                   input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
-          
-            button.btn.btn-primary(type='submit') Invite friends to party!
+            button.btn.btn-info(type='submit') Start a  party!
         
        
   //Similar User
-  panel.panel-success(style = "margin-bottom: 10px;")
+  panel.panel-info(style = "margin-bottom: 60px; margin-top: 100px;")
     .panel-heading
       .panel-title 
         a#acquaintance People you may know
@@ -57,29 +54,26 @@ block left
   
   
 block content  
-  panel.panel-danger(style = "margin-bottom: 10px;")
+  panel.panel-danger(style = "margin-bottom: 60px; margin-top: 100px;")
     .panel-heading
       .panel-title 
-        a#search Search a Business
+        a#search Search a Restaurant
     .page-body
-      form(method='get', action='/business_list')
-        label() Business Name: 
-        br
-        input(type='text', name='name', value='')
-        br
-        label() City: 
-        br
-        input(type='text', name='city', value='')
-        br
-        label() State: 
-        br
-        input(type='text', name='state', value='')
-        br
-        button.btn.btn-primary(type='submit',style = "margin-bottom: 10px;") Search
+    
+      form.form-inline(method='get', action='/business_list')
+        .form-group
+          input.form-control(name="name", type = "text", placeholder="Restaurant Name")
+        .form-group
+          input.form-control(name="city",type = "text", placeholder = "City")
+        .form-group
+          input.form-control(name="state",type = "text", placeholder = "State")
+        button.btn.btn-info(type='submit',style = "margin-bottom: 10px;")
+         span.glyphicon.glyphicon-search(aria-hidden='true')
+                |&nbspSearch
   // Put a click button that lets us return to the index page 
 
   //Favorite Businesses
-  .panel.panel-info(style = "margin-bottom: 10px;")
+  .panel.panel-info(style = "margin-bottom: 60px; margin-top: 100px;")
     .panel-heading
       .panel-title 
         a#favourites Favorites

@@ -4,10 +4,12 @@
 include ./includes/row_list.jade
 extend layout
 block left
+ 
+        
   panel.panel-success(style = "margin-bottom: 60px; margin-top: 100px;")
     .panel-heading
       .panel-title 
-        a#account #{title}
+        a#account Hello, #{title}
     .page-body
       +extend_row(current_user)
       br   
@@ -37,22 +39,17 @@ block left
     .page-body
       +extend_row_array(similar_user_list)
 
-  //- //Friends
-  //- p
-  //-   | Friends:
-  //- - for (var i = 0; i < friends_list.length; i++)
-  //-   // Create a table with one row per result
-  //-   table
-  //-     tr
-  //-     - for (var key in friends_list[i])
-  //-       td #{key}  #{friends_list[i][key]}
-  //-       td &nbsp;
-  //-       br
-        
-  //-   #{friends_list[i].FIRST_NAME}&nbsp #{friends_list[i].LAST_NAME}
-  //-   br
-  
-  
+  panel.panel-success(style = "margin-bottom: 60px; margin-top: 100px;")
+    .panel-heading
+      .panel-title 
+         | Search Users by First or Last Name!
+         br
+    .page-body
+      form-form-inline(method='get', action='/search_user')
+        input(type='text', name='stranger_id') 
+        button.btn.btn-info(type='submit',style = "margin-bottom: 10px;")     
+          span.glyphicon.glyphicon-search(aria-hidden='true')
+          
 block content  
   panel.panel-danger(style = "margin-bottom: 60px; margin-top: 100px;")
     .panel-heading
@@ -69,7 +66,6 @@ block content
           input.form-control(name="state",type = "text", placeholder = "State")
         button.btn.btn-info(type='submit',style = "margin-bottom: 10px;")
          span.glyphicon.glyphicon-search(aria-hidden='true')
-                |&nbspSearch
   // Put a click button that lets us return to the index page 
 
   //Favorite Businesses

@@ -38,10 +38,10 @@ function post(request, response) {
 
 
 exports.post = post;
-exports.do_work = function(req, res){
-  res.render('login.jade', { 
-      title: 'hello',
-      schema: APP_USERS.schema,
-      label: APP_USERS.label
-  });
-};
+exports.get = function(req, res){
+	  res.render('login.jade', { 
+		  title: 'hello',
+		  schema: APP_USERS.schema,
+		  label: APP_USERS.label
+	  });
+	};

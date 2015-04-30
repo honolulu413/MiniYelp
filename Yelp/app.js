@@ -25,6 +25,7 @@ var express = require('express')
  , invite = require('./routes/invite')
  , add_friend = require('./routes/add_friend')
  , message = require('./routes/message')
+ , search_user = require('./routes/search_user')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
 
@@ -38,8 +39,7 @@ var app = express();
 init_app(app);
 
 // When we get a request for {app}/ we should call routes/index.js
-app.get('/', routes.do_work);
-app.get('/login', login.do_work);
+app.get('/login', login.get);
 app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
@@ -59,6 +59,10 @@ app.post('/user/add_friend', add_friend.post);
 app.post('/user/send_message', message.post);
 app.get('/facebook', facebook.do_work);
 
+
+app.get('/search_user', search_user.get);
+
+app.get('/', login.get);
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function() {

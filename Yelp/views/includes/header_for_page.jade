@@ -9,5 +9,7 @@ mixin extend_pageheader(username)
          span.icon-bar
       div.collapse.navbar-collapse
         ul.nav.nav-pills
-          li: a(href='/user/#{username}') HomePage
+          li: a(href='/user/#{username}')
+            span.glyphicon.glyphicon-home(aria-hidden='true')
+            
        

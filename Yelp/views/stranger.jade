@@ -29,7 +29,9 @@ block left
         input(type='text', name='message', value='send message to your friend!') 
         input(type='submit', value='send') 
 
-    h1 Checkout your friend's favorite: 
+block bottom
+    h1 
+      span.label.label-info Checkout your friend's favorite: 
     +extend_row_array(business_list)
       
    

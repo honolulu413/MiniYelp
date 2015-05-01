@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='/css/demos.css', type='text/css', media='screen')
+    script(src='/css/RGraph.common.core.js')
+    script(src='/css/RGraph.common.effects.js')
+    script(src='/css/RGraph.hbar.js')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+  body
+    canvas#cvs(width='400', height='180') [No canvas support]
+    script.
+      $(document).ready(function ()
+      {
+      var hbar = new RGraph.HBar({
+      id: 'cvs',
+      data: [5,4,3,2,1],
+      options: {
+      background: {
+      grid: false
+      },
+      xmax: 5,
+      scale: {
+      decimals: 1
+      },
+      colors: {
+      self: ['#FFDE00'],
+      sequential: true
+      },
+      labels: {
+      self: ['5 star','4 star','3 star','2 star','1 star',],
+      above: {
+      self: true,
+      decimals: 1
+      }
+      },
+      noxaxis: true,
+      gutter: {
+      left: 125
+      },
+      xlabels: false
+      }
+      }).grow()
+      })

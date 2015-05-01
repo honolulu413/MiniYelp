@@ -1,4 +1,5 @@
 // Connect string to Oracle
+var getData = require('./row').getData;
 
 var connectData = { 
 		  "hostname": "yelpfundbinstance.cfvsrwydlnih.us-east-1.rds.amazonaws.com:1521/MYYELPDB", 
@@ -11,7 +12,6 @@ var oracle =  require("oracle");
 	
 function execute(sql, handleResults) {
   console.log("about to execute sql:" + sql);
-  var t = Date.now();
   oracle.connect(connectData, function(err, connection) {
     if ( err ) {
     	handleResults(err, null);
@@ -24,9 +24,6 @@ function execute(sql, handleResults) {
 	  	    	console.log(err);
 	  	    	handleResults(err, null);
 	  	    } else {
-	  	    	console.log("time -----------");
-	  	    	console.log(Date.now());
-	  	    	console.log( Date.now() - t);
 	  	    	handleResults(null, results);
 	  	    	connection.close(); // done with the connection
 	  	    }
@@ -83,6 +80,34 @@ function insert(table, row, handleResults) {
 		var sql = "INSERT INTO " + table.name +
 			" (" + rowFormatted.schema.join(", ") +
 			") VALUES(" + rowFormatted.data.join(", ") + ")";
+		execute(sql, handleResults);
+	} else {
+		handleResults("invalid row", null);
+	}
+}
+
+
+function update(table, row, handleResults) {
+	if (table.primaryKey == null) {
+		console.log("table has no primary key ! error in update function");
+	}
+	
+	if (table.checkLegalData(row) && table.checkPrimaryKey(row) && table.checkNotNull(row)) {
+		var rowFormatted = adjustTypeFormat(table, row);
+		
+		var sql_set_clause = rowFormatted.schema[0] + " = " + rowFormatted.data[0];
+		for (var i = 1; i < rowFormatted.schema.length; i++) {
+			sql_set_clause += ", " + rowFormatted.schema[i] + " = " + rowFormatted.data[i];
+		}
+		
+		var sql_where_clause = table.primaryKey[0] + " = " + getData(rowFormatted, table.primaryKey[0]);
+		for (var i = 1; i < table.primaryKey.length; i++) {
+			sql_where_clause += " AND " + table.primaryKey[i] + " = " + getData(rowFormatted, table.primaryKey[i]);
+		}
+
+		var sql = "UPDATE " + table.name +
+			" SET " + sql_set_clause + 
+			" WHERE " + sql_where_clause;
 		execute(sql, handleResults);
 	} else {
 		handleResults("invalid row", null);
@@ -251,6 +276,7 @@ function getTask(sql) {
 exports.execute = execute;
 exports.executeBatch = executeBatch;
 exports.insert = insert;
+exports.update = update;
 exports.select = select;
 exports.exist = exist;
 exports.allExist = allExist;

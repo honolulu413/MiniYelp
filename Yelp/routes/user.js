@@ -80,7 +80,10 @@ function get(request, respond) {
 										],
 										function(err, resultsArray){
 											if (err == null) {
+												console.log(resultsArray[0]);
 												var similarUserList = rowArrayWithLabel(resultsArray[0], ['USER_NAME_ID', 'USER_NAME_ID', 'FIRST_NAME', 'LAST_NAME'], ['.url', 'user id', 'first name', 'last name']);
+//												console.log("similarUserList");
+//												console.log(similarUserList);
 												for(var i = 0; i < similarUserList.length; i++) {
 													similarUserList[i].data[0] = '/user/' + similarUserList[i].data[0];
 												}

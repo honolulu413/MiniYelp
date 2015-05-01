@@ -8,7 +8,7 @@ function getTask(currentUser) {
 			" WHERE LOCATION_CITY = '" + currentUser.LOCATION_CITY + "'" +
 			" AND LOCATION_STATE = '" +  currentUser.LOCATION_STATE + "'" + 
 			" AND USER_NAME_ID <> '" + currentUser.USER_NAME_ID + "'" +
-			" AND USER_NAME_ID IN " +
+			" AND USER_NAME_ID NOT IN " +
 			" (SELECT USER_NAME_ID2 FROM APP_USER_FRIENDS " +
 			" WHERE USER_NAME_ID1 = '" + currentUser.USER_NAME_ID + "'" +
 			" UNION " +
@@ -19,7 +19,7 @@ function getTask(currentUser) {
 		database.execute(sql, function(err, results_similar_user) {			
 			
 			if (err === null) {
-				if (results_similar_user.length <= recommendNumber) {
+				if (false) {
 					var sql = "SELECT * FROM"
 						+ " ( SELECT * FROM APP_USERS"
 						+ " WHERE USER_NAME_ID <> '" + currentUser.USER_NAME_ID + "' "

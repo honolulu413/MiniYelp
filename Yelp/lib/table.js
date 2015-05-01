@@ -60,25 +60,25 @@ Table.prototype.checkPrimaryKey = function(row) {
 
 // not null constraint
 Table.prototype.checkNotNull = function(row) {
-	if (this.notNull === undefined) {
-		return true;
-	}
-	
-	for ( var i = 0; i < this.notNull.length; i++) {
-		var columnName = this.notNull[i];
-		var indexInRow = row.schema.indexOf(columnName);
-
-		if (typeof indexInRow === 'undefined') {
-			console.log("not null contraint violated!");
-			return false;
-		}
-
-		var notNullData = row.data[indexInRow];
-		if (typeof notNullData === 'undefined' || notNullData === "") {
-			console.log("not null contraint violated!");
-			return false;
-		}
-	}
+//	if (this.notNull === undefined) {
+//		return true;
+//	}
+//	
+//	for ( var i = 0; i < this.notNull.length; i++) {
+//		var columnName = this.notNull[i];
+//		var indexInRow = row.schema.indexOf(columnName);
+//
+//		if (typeof indexInRow === 'undefined') {
+//			console.log("not null contraint violated!");
+//			return false;
+//		}
+//
+//		var notNullData = row.data[indexInRow];
+//		if (typeof notNullData === 'undefined' || notNullData === "") {
+//			console.log("not null contraint violated!");
+//			return false;
+//		}
+//	}
 	return true;
 };
 

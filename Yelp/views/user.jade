@@ -10,8 +10,11 @@ block left
         a#account Hello, #{title}
     .page-body
       .row
-        .col-md-4
-          img(src='/images/logo.jpg', alt='profile pic')
+        .col-md-6
+          img(src='/images/' + user_name + '.jpg', alt='No Profile Picture!',style = "max-width : 200px;max-height : 200px") 
+        
+          //img(src='/images/logo.jpg', alt='profile pic')
+
         .col-md-6 
           +extend_row(current_user)
    

@@ -133,15 +133,15 @@ block content
       // Create a table with one row per result
       li.list-group-item
         ul
-          li REVIEW_DATE:  #{goodRievew[i]["REVIEW_DATE"]}
-          li REVIEW_TEXT:  #{goodRievew[i]["REVIEW_TEXT"]}
-          li STAR:  #{goodRievew[i]["STAR"]}
+          li date:  #{goodRievew[i]["REVIEW_DATE"]}
+          li review:  #{goodRievew[i]["REVIEW_TEXT"]}
+          li star:  #{goodRievew[i]["STAR"]}
   
   //- h3 Top Positive Reviews:                     
   //-   - for (var i = 0; i < goodRievew.length; i++)
-  //-     p REVIEW_DATE:  #{goodRievew[i]["REVIEW_DATE"]}
-  //-     p REVIEW_TEXT:  #{goodRievew[i]["REVIEW_TEXT"]}
-  //-     p STAR:  #{goodRievew[i]["STAR"]}
+  //-     p data:  #{goodRievew[i]["REVIEW_DATE"]}
+  //-     p review:  #{goodRievew[i]["REVIEW_TEXT"]}
+  //-     p star:  #{goodRievew[i]["STAR"]}
   h3 
     span.label.label-danger Top Negative Reviews:
   ul.list-group                      
@@ -149,9 +149,9 @@ block content
       // Create a table with one row per result
       li.list-group-item
         ul
-          li REVIEW_DATE:  #{badReview[i]["REVIEW_DATE"]}
-          li REVIEW_TEXT:  #{badReview[i]["REVIEW_TEXT"]}
-          li STAR:  #{badReview[i]["STAR"]}
+          li date:  #{badReview[i]["REVIEW_DATE"]}
+          li review:  #{badReview[i]["REVIEW_TEXT"]}
+          li star:  #{badReview[i]["STAR"]}
   //- h3 Top badReview Reviews:                     
   //-   - for (var i = 0; i < badReview.length; i++)
   //-     p REVIEW_DATE:  #{badReview[i]["REVIEW_DATE"]}

@@ -28,6 +28,7 @@ var express = require('express')
  , search_user = require('./routes/search_user')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
+ , image = require('./routes/image')
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');
@@ -59,6 +60,9 @@ app.get('/facebook', facebook.do_work);
 
 
 app.get('/search_user', search_user.get);
+app.get('/image', image.get);
+app.post('/image', image.post);
+
 
 app.get('/', login.get);
 

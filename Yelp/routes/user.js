@@ -9,6 +9,30 @@ var rowArrayWithLabel = require('../lib/row').rowArrayWithLabel;
 var recommend_similar_user = require('../lib/recommend/recommend_similar_user');
 var async = require('async');
 
+var fs = require('fs');
+
+function imageHelper(user) {
+
+	console.log("hahah" + user)
+	var downloadImage;
+	database_nosql.find('image', {
+		userName : user
+	}, function(result) {
+		if (typeof result[0] !== 'undefined') {
+			downloadImage = result[0].imageContent;
+			var imagePath = "./public/images/" + user + ".jpg";
+			var fileName = user + ".jpg";
+			fs.writeFile(imagePath, downloadImage.buffer,
+					function(err) {
+					});	
+		}
+
+	});
+
+
+	
+}
+
 function get(request, respond) {
 	
 	var userName = getPath(request.params[0]);
@@ -20,6 +44,9 @@ function get(request, respond) {
 	}
 	
 	if (request.session.username === userName) {
+		
+		imageHelper(userName);
+		
 		database.select(
 						APP_USERS,
 						{

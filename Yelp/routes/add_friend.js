@@ -14,13 +14,22 @@ function post(request, response) {
 		schema : APP_USER_FRIENDS.primaryKey,
 		data : [current_user_id, stranger_id]
 	}, function(err, results) {
-		if (err !== null) {
+		if (err === null) {
 			response.writeHead(302, {
 				  'Location': '/user/' + stranger_id
 			});
 			response.end();		
 		} else {
 			console.log(err);
+		}
+	});
+	
+	database.insert(APP_USER_FRIENDS, {
+		schema : APP_USER_FRIENDS.primaryKey,
+		data : [stranger_id, current_user_id]
+	}, function(err, results) {
+		if (err === null) {
+		} else {
 		}
 	});
 }

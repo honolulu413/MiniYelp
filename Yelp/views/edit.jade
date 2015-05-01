@@ -6,7 +6,7 @@ block content
       p #{message}
       
   .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
-    h2.form-signup-heading Welcome to Smart Yelp
+    h2.form-signup-heading Update your profile:
     form.form-signup(method='post', action = post_path)
       - for (var i = 0; i < current_user.label.length; i++)
         .form-group

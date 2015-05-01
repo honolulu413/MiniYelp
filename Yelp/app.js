@@ -29,8 +29,7 @@ var express = require('express')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
  , edit = require('./routes/edit')
- , bar = require('./routes/bar')
-
+ , index = require('./routes/index')
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');
@@ -52,8 +51,8 @@ app.get('/signup',signup.do_work);
 app.get('/google', google.do_work);
 app.get('/facebook', facebook.do_work);
 app.get('/search_user', search_user.get);
-app.get('/', login.get);
-app.get('/bar', bar.do_work);
+
+app.get('/', index.get);
 
 
 app.post('/invite', invite.post);

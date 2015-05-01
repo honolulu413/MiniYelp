@@ -7,22 +7,14 @@ include ./includes/header_for_page.jade
 extend layoutPage
 block header
   +extend_pageheader(userName)
+  
 block left
   panel.panel-info(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title Basic Information
     .page-body  
-      p
-        | Current user: #{userName}
-        br
+      +extend_row(business_profile)
       
-        | Information about this business:  
-      - for (var i = 0; i < business.length; i++)
-        // Create a table with one row per result
-        table
-          - for (var key in business[i])
-              tr
-                td #{key} :  #{business[i][key]}
       .row  
         .col-md-4
           form(method='post', action='/bing')
@@ -85,7 +77,11 @@ block left
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     p
-      #googleMap(style="width:500px; height:380px;")
+      br
+      br
+      h3
+        Google Maps
+      #googleMap(style="width:420px; height:500px;")
       form(method='get', action='/google')
         input(type='hidden', name='LATITUDE', value='#{business[0].LATITUDE}') 
         input(type='hidden', name='LONGITUDE', value='#{business[0].LONGITUDE}') 
@@ -95,8 +91,41 @@ block left
    
 
 block content
-//start of review bars
-
+  .container
+    canvas#cvs(width='500', height='160')
+    script.
+      $(document).ready(function ()
+      {
+      var hbar = new RGraph.HBar({
+      id: 'cvs',
+      data: [#{reviewArray}],
+      options: {
+      background: {
+      grid: false
+      },
+      xmax: #{maxReviewNumber},
+      scale: {
+      decimals: 1
+      },
+      colors: {
+      self: ['#FFDE00'],
+      sequential: true
+      },
+      labels: {
+      self: ['5 star','4 star','3 star','2 star','1 star',],
+      above: {
+      self: true,
+      decimals: 1
+      }
+      },
+      noxaxis: true,
+      gutter: {
+      left: 60
+      },
+      xlabels: false
+      }
+      }).grow()
+      })
   h3       
     span.label.label-success Top Positive Reviews:
   ul.list-group                      
@@ -128,6 +157,7 @@ block content
   //-     p REVIEW_DATE:  #{badReview[i]["REVIEW_DATE"]}
   //-     p REVIEW_TEXT:  #{badReview[i]["REVIEW_TEXT"]}
   //-     p STAR:  #{badReview[i]["STAR"]}
+  
 
 block bottom
   h3 

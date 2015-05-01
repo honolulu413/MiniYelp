@@ -8,12 +8,10 @@ block header
 block left
   panel.panel-success(style = "margin-bottom: 10px;")
     .panel-heading
-      .panel-title #{title}
+      .panel-title #{user_info_basic.data[0]}
     .page-body
-    ul
-      - for (var key in user_info)
-        li #{key}  #{user_info[key]}
-
+      +extend_row(user_info_basic)
+   
   // add-friend button
   - if(typeof current_user_id !== 'undefined')
     - if (is_friend === false)

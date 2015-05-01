@@ -12,3 +12,7 @@ block content
         .form-group
           input.form-control(name = current_user.name[i], type = current_user.type[i], placeholder = current_user.label[i], value = current_user.data[i])
       button.btn.btn-primary(type='submit') Update!
+      
+    form(action="/image", method="post", enctype="multipart/form-data")
+      input(type="file", name="displayImage")
+      input(type="submit" value="Upload Image" name="submit")

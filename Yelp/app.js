@@ -53,7 +53,7 @@ app.get('/google', google.do_work);
 app.get('/facebook', facebook.do_work);
 app.get('/search_user', search_user.get);
 
-app.get('/', index.get);
+app.get('/', login.get);
 
 
 app.post('/invite', invite.post);

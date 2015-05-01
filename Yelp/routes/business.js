@@ -67,6 +67,12 @@ function get(request, respond) {
 						for(var i = 0; i < similarBusinessList.length; i++) {
 							similarBusinessList[i].data[0] = '/business/' + similarBusinessList[i].data[0];
 						}
+						console.log("business INFO");
+						 var businessList = [];
+	                        businessList.push(businessInfo);
+                        var businessProfile = rowArrayWithLabel([businessInfo],['NAME','FULL_ADDRESS','CITY','STATE','STAR','REVIEW_COUNT'],['name:','address:','city:','state:','star:','reviews:']);
+                        console.log(businessProfile);
+
 
 						
                         var businessList = [];
@@ -81,9 +87,11 @@ function get(request, respond) {
                         
     					var star_array = [0, 0, 0, 0, 0];
     					var maxReviewNumber = 0;
-    					for (var i = 0; i < results.length; i++) {
+    					console.log(resultsArray[4]);
+    					for (var i = 0; i < resultsArray[4].length; i++) {
     						var a = resultsArray[4][i].STAR_COUNT;
-    						star_array[resultsArray[4][i].STAR - 1] = a;
+    						console.log(a);
+    						star_array[5 - resultsArray[4][i].STAR] = a;
     						if (a > maxReviewNumber) maxReviewNumber = a;
     					}
     					console.log(star_array);
@@ -93,6 +101,7 @@ function get(request, respond) {
                                           
                         respond.render('business.jade', {   
                             business: businessList,
+                            business_profile: businessProfile[0],
                             goodRievew : resultsArray[0],
                             badReview : resultsArray[1],
                             userName: currentUser,

@@ -1,15 +1,15 @@
 doctype html
 html
   include ./includes/head.jade
-  body(style = 'background-color : #F5F5F5')
+  body(style = 'background-color : #F5F5F5;padding-left : 30px; padding-right:30px')
     block header
     //h4 Here is outside of container
     .container-fluid
       //h4 Inside container
       .row
-        .col-md-4
+        .col-md-5
           block left
-        .col-md-8
+        .col-md-7
           block content
       .row
         block bottom

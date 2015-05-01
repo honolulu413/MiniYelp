@@ -18,8 +18,8 @@ function imageHelper(user) {
 	database_nosql.find('image', {
 		userName : user
 	}, function(result) {
-		if (typeof result[0] !== 'undefined') {
-			downloadImage = result[0].imageContent;
+		if (typeof result[result.length - 1] !== 'undefined') {
+			downloadImage = result[result.length - 1].imageContent;
 			var imagePath = "./public/images/" + user + ".jpg";
 			var fileName = user + ".jpg";
 			fs.writeFile(imagePath, downloadImage.buffer,

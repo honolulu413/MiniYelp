@@ -37,6 +37,9 @@ exports.get = function(request, response){
 							}
 						}
 						);
+	} else {
+		response.redirect('/login');
+		return;
 	}
 	
 };
@@ -67,6 +70,9 @@ exports.post = function(request, response){
 				response.redirect('/user/' + userName);
 			}
 		});
+	} else {
+		response.redirect('/login');
+		return;
 	}
 };
 

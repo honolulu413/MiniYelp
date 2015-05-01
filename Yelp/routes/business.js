@@ -60,11 +60,12 @@ function get(request, respond) {
 						for(var i = 0; i < similarBusinessList.length; i++) {
 							similarBusinessList[i].data[0] = '/business/' + similarBusinessList[i].data[0];
 						}
+						console.log("business INFO");
+						 var businessList = [];
+	                        businessList.push(businessInfo);
+                        var businessProfile = rowArrayWithLabel([businessInfo],['NAME','FULL_ADDRESS','CITY','STATE','STAR','REVIEW_COUNT'],['name','address','city','state','star','reviews']);
+                        console.log(businessProfile);
 
-						
-                        var businessList = [];
-                        businessList.push(businessInfo);
-                        
                         if (resultsArray[3].length == 0) {
                         	var isFavorate = false;
                         } else {
@@ -73,6 +74,7 @@ function get(request, respond) {
                         
                         respond.render('business.jade', {   
                             business: businessList,
+                            business_profile: businessProfile[0],
                             goodRievew : resultsArray[0],
                             badReview : resultsArray[1],
                             userName: currentUser,

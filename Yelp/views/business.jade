@@ -7,22 +7,14 @@ include ./includes/header_for_page.jade
 extend layoutPage
 block header
   +extend_pageheader(userName)
+  
 block left
   panel.panel-info(style = "margin-bottom: 10px;")
     .panel-heading
       .panel-title Basic Information
     .page-body  
-      p
-        | Current user: #{userName}
-        br
+      +extend_row(business_profile)
       
-        | Information about this business:  
-      - for (var i = 0; i < business.length; i++)
-        // Create a table with one row per result
-        table
-          - for (var key in business[i])
-              tr
-                td #{key} :  #{business[i][key]}
       .row  
         .col-md-4
           form(method='post', action='/bing')

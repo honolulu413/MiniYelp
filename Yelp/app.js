@@ -28,9 +28,12 @@ var express = require('express')
  , search_user = require('./routes/search_user')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
+<<<<<<< HEAD
+ , image = require('./routes/image')
+=======
  , edit = require('./routes/edit')
  , index = require('./routes/index')
-
+>>>>>>> branch 'master' of https:// github.com/sylsgl/550.git
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');
@@ -52,6 +55,7 @@ app.get('/signup',signup.do_work);
 app.get('/google', google.do_work);
 app.get('/facebook', facebook.do_work);
 app.get('/search_user', search_user.get);
+
 app.get('/', index.get);
 
 
@@ -63,6 +67,14 @@ app.post('/facebook_login', facebook_login.post);
 app.post('/favorite', favorite.post);
 app.post('/user/add_friend', add_friend.post);
 app.post('/user/send_message', message.post);
+app.get('/facebook', facebook.do_work);
+
+app.get('/search_user', search_user.get);
+app.get('/image', image.get);
+app.post('/image', image.post);
+
+
+app.get('/', login.get);
 app.post('/user/*/edit', edit.post);
 
 // Listen on the port we specify

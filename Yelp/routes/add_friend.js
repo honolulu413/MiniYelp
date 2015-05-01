@@ -23,15 +23,6 @@ function post(request, response) {
 			console.log(err);
 		}
 	});
-	
-	database.insert(APP_USER_FRIENDS, {
-		schema : APP_USER_FRIENDS.primaryKey,
-		data : [stranger_id, current_user_id]
-	}, function(err, results) {
-		if (err === null) {
-		} else {
-		}
-	});
 }
 
 exports.post = post;

@@ -5,8 +5,7 @@ var type = 'image/jpeg';
 var user;
 
 function post(req, res) {
-	user = request.session.username;
-
+	user = req.session.username;
 	fs.readFile(req.files.displayImage.path, function(err, data) {
 		console.log(data);
 		database_nosql.insert('image', {
@@ -21,6 +20,7 @@ function post(req, res) {
 }
 
 function get(request, respond) {
+	var user = 'lu';
 	var downloadImage;
 	database_nosql.find('image', {
 		userName : user

@@ -121,14 +121,13 @@ function get(request, respond) {
 						for(var i = 0; i < businessList.length; i++) {
 							businessList[i].data[0] = '/business/' + businessList[i].data[0];
 						}
-						
-						var userInfoBasic =rowArrayWithLabel([resultsArray[0][0]], ['FIRST_NAME','LAST_NAME','LOCATION_CITY','LOCATION_STATE'],['first name:','last name:','city:','state:']); 
-						console.log("--======---ss");
-						console.log( userInfoBasic);
+			            var userInfoBasic =rowArrayWithLabel([resultsArray[0][0]], ['FIRST_NAME','LAST_NAME','LOCATION_CITY','LOCATION_STATE'],['first name:','last name:','city:','state:']); 
+                        console.log(userInfoBasic[0]);
+
 						respond.render('stranger.jade', {
 							title : currentUserID,
 							user_info : resultsArray[0][0],
-							user_info_basic : userInfoBasic,
+							user_info_basic : userInfoBasic[0],
 							business_list : businessList,
 							current_user_id : currentUserID,
 							stranger_id : strangerID,
@@ -145,9 +144,12 @@ function get(request, respond) {
 				database.executeBatch(queryBatch, function(
 						errArray, resultsArray) {
 					if (errArray === null) {
+			            var userInfoBasic =rowArrayWithLabel([resultsArray[0][0]], ['FIRST_NAME','LAST_NAME','LOCATION_CITY','LOCATION_STATE'],['first name:','last name:','city:','state:']); 
+			            console.log(userInfoBasic[0]);
 						respond.render('stranger.jade', {
 							title : currentUserID,
 							user_info : resultsArray[0][0],
+	                        user_info_basic : userInfoBasic[0],
 							business_list : null,
 							current_user_id : currentUserID,
 							stranger_id : strangerID,

@@ -28,12 +28,9 @@ var express = require('express')
  , search_user = require('./routes/search_user')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
-<<<<<<< HEAD
  , image = require('./routes/image')
-=======
  , edit = require('./routes/edit')
  , index = require('./routes/index')
->>>>>>> branch 'master' of https:// github.com/sylsgl/550.git
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');

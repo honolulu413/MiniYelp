@@ -1,0 +1,14 @@
+extend layoutSimple
+
+block content
+  - if(typeof message !== 'undefined')
+    .alert.alert-warning(role='alert')
+      p #{message}
+      
+  .contatiner(style = "max-width: 400px;padding: 15px;margin: 0 auto;")  
+    h2.form-signup-heading Welcome to Smart Yelp
+    form.form-signup(method='post', action = post_path)
+      - for (var i = 0; i < current_user.label.length; i++)
+        .form-group
+          input.form-control(name = current_user.name[i], type = current_user.type[i], placeholder = current_user.label[i], value = current_user.data[i])
+      button.btn.btn-primary(type='submit') Update!

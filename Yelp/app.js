@@ -28,6 +28,7 @@ var express = require('express')
  , search_user = require('./routes/search_user')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
+ , edit = require('./routes/edit')
 
  ;
 var bing = require('./routes/bing');
@@ -40,6 +41,7 @@ init_app(app);
 
 // When we get a request for {app}/ we should call routes/index.js
 app.get('/login', login.get);
+app.get('/user/*/edit', edit.get);
 app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
@@ -47,22 +49,20 @@ app.get('/logout', logout.get);
 app.get('/favorite', favorite.get);
 app.get('/signup',signup.do_work);
 app.get('/google', google.do_work);
+app.get('/facebook', facebook.do_work);
+app.get('/search_user', search_user.get);
+app.get('/', login.get);
+
+
 app.post('/invite', invite.post);
 app.post('/bing', bing.post);
-
-
 app.post('/register', register.post);
 app.post('/login', login.post);
 app.post('/facebook_login', facebook_login.post);
 app.post('/favorite', favorite.post);
 app.post('/user/add_friend', add_friend.post);
 app.post('/user/send_message', message.post);
-app.get('/facebook', facebook.do_work);
-
-
-app.get('/search_user', search_user.get);
-
-app.get('/', login.get);
+app.post('/user/*/edit', edit.post);
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function() {

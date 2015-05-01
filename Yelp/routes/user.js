@@ -73,6 +73,7 @@ function get(request, respond) {
 													var message = rowArrayWithLabel(results, ['sender', 'text'], ['sender', 'new message']);
 													respond.render('user.jade', {
 														title : userName,
+														user_name : userName,
 														similar_user_list : similarUserList,
 														business_list : businessList,
 														friends_list : resultsArray[2],

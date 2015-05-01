@@ -31,6 +31,7 @@ block left
                   | #{friends_list[i].LAST_NAME} &nbsp #{friends_list[i].FIRST_NAME} 
                   a(href='/user/' + friends_list[i]["USER_NAME_ID"]) details &nbsp
                   input(type='checkbox', name='friends_list', value=friends_list[i]["USER_NAME_ID"])
+            input(type='hidden', name='friends_list', value=title)
             button.btn.btn-info(type='submit') Start a  party!
       +extend_row_array(message)
       

@@ -30,7 +30,6 @@ var express = require('express')
  , facebook = require('./routes/facebook')
  , edit = require('./routes/edit')
  , index = require('./routes/index')
-
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');
@@ -52,6 +51,7 @@ app.get('/signup',signup.do_work);
 app.get('/google', google.do_work);
 app.get('/facebook', facebook.do_work);
 app.get('/search_user', search_user.get);
+
 app.get('/', index.get);
 
 

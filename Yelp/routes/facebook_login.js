@@ -25,14 +25,16 @@ function post(request, response) {
 				});
 				response.end();		
 			} else {
+				var newRow = requestQueryParser.parse(request, ["USER_NAME_ID", "PASSWORD", "FIRST_NAME", "LAST_NAME"]);
 				// sign up
-				database.insert(APP_USERS, row, function(err, results) {
+				console.log(newRow);
+				database.insert(APP_USERS, newRow, function(err, results) {
 					if (err === null) {
 						// successfully log in. redirect to homepage
-						request.session.username = getData(row, "USER_NAME_ID");
+						request.session.username = getData(newRow, "USER_NAME_ID");
 
 						response.writeHead(302, {
-							  'Location': '/user/' + getData(row, 'USER_NAME_ID')
+							  'Location': '/user/' + getData(newRow, 'USER_NAME_ID')
 						});
 						response.end();		
 					}

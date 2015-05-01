@@ -39,6 +39,10 @@ function get(request, respond) {
                 var favorateBusinessQuery = " SELECT * FROM FAVORITES  " +
                 					" WHERE USER_NAME_ID = '" + currentUser + "' " + 
                 					" AND BUSINESS_ID = '" +  businessID + "' ";
+                var reviewArrayQuery = " SELECT STAR, COUNT(*) STAR_COUNT " +
+    			" FROM REVIEWS r " +
+    			" WHERE r.BUSINESS_ID = '" +   businessID + 
+    			"' GROUP BY r.STAR ";
                 
                 
             	async.parallel([function(callback) {
@@ -50,7 +54,10 @@ function get(request, respond) {
             	recommend_similar_business.getTask(null, businessInfo),
             	function(callback) {
             		database.execute(favorateBusinessQuery, callback);
-            	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            	},
+            	function(callback) {
+            		database.execute(reviewArrayQuery, callback);
+            	}
             	],
             	function(err, resultsArray) {
 
@@ -65,19 +72,34 @@ function get(request, respond) {
                         var businessList = [];
                         businessList.push(businessInfo);
                         
-                        if (resultsArray[3].length == 0) {
-                        	var isFavorate = false;
+                        var isFavorate;
+                        if (resultsArray[3].length === 0) {
+                        	isFavorate = false;
                         } else {
-                        	var isFavorate = true;
+                        	isFavorate = true;
                         }
                         
+    					var star_array = [0, 0, 0, 0, 0];
+    					var maxReviewNumber = 0;
+    					for (var i = 0; i < results.length; i++) {
+    						var a = resultsArray[4][i].STAR_COUNT;
+    						star_array[resultsArray[4][i].STAR - 1] = a;
+    						if (a > maxReviewNumber) maxReviewNumber = a;
+    					}
+    					console.log(star_array);
+    					
+//    					star_array[0]
+//    					star_array[4]
+                                          
                         respond.render('business.jade', {   
                             business: businessList,
                             goodRievew : resultsArray[0],
                             badReview : resultsArray[1],
                             userName: currentUser,
                             similar_business_list: similarBusinessList,
-                            is_favorate : isFavorate
+                            is_favorate : isFavorate,
+                            reviewArray : star_array,
+                            maxReviewNumber : maxReviewNumber
                         });
                         
                     }

@@ -10,6 +10,7 @@ block left
     .panel-heading
       .panel-title #{title}
     .page-body
+      //+extend_row(user_info_basic)
     ul
       - for (var key in user_info)
         li #{key}  #{user_info[key]}

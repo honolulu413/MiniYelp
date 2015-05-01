@@ -63,7 +63,7 @@ function get(request, respond) {
 						console.log("business INFO");
 						 var businessList = [];
 	                        businessList.push(businessInfo);
-                        var businessProfile = rowArrayWithLabel([businessInfo],['NAME','FULL_ADDRESS','CITY','STATE','STAR','REVIEW_COUNT'],['name','address','city','state','star','reviews']);
+                        var businessProfile = rowArrayWithLabel([businessInfo],['NAME','FULL_ADDRESS','CITY','STATE','STAR','REVIEW_COUNT'],['name:','address:','city:','state:','star:','reviews:']);
                         console.log(businessProfile);
 
                         if (resultsArray[3].length == 0) {

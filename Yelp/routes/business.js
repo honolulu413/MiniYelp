@@ -81,9 +81,11 @@ function get(request, respond) {
                         
     					var star_array = [0, 0, 0, 0, 0];
     					var maxReviewNumber = 0;
-    					for (var i = 0; i < results.length; i++) {
+    					console.log(resultsArray[4]);
+    					for (var i = 0; i < resultsArray[4].length; i++) {
     						var a = resultsArray[4][i].STAR_COUNT;
-    						star_array[resultsArray[4][i].STAR - 1] = a;
+    						console.log(a);
+    						star_array[5 - resultsArray[4][i].STAR] = a;
     						if (a > maxReviewNumber) maxReviewNumber = a;
     					}
     					console.log(star_array);

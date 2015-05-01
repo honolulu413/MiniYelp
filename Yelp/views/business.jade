@@ -29,13 +29,18 @@ block left
             input(type='hidden', name='BUSINESS_NAME', value='#{business[0]["NAME"]}') 
             input(type='hidden', name='BUSINESS_CITY', value='#{business[0]["CITY"]}') 
             input(type='hidden', name='BUSINESS_STATE', value='#{business[0]["STATE"]}') 
-            input(type='submit', value='Search in Bing')
+            button.btn.btn-info(type='submit', value='Search in Bing')
+              span.glyphicon.glyphicon-search(aria-hidden='true')
+                |&nbspBingSearch
+              
         - if (!is_favorate)
           .col-md-4
             form(method='post', action='/favorite')
               input(type='hidden', name='BUSINESS_ID', value='#{business[0]["BUSINESS_ID"]}') 
               input(type='hidden', name='USER_NAME_ID', value='#{userName}') 
-              input(type='submit', value='Add to my favorites')
+              button.btn.btn-danger(type='submit', value='Add to my favorites')
+                span.glyphicon.glyphicon-heart(aria-hidden='true')
+                
   .container  
     //Google map
     script(src="https://maps.googleapis.com/maps/api/js?v=3.exp")    
@@ -90,6 +95,47 @@ block left
    
 
 block content
+//start of review bars
+  link(rel='stylesheet', href='/css/demos.css', type='text/css', media='screen')
+  script(src='/css/RGraph.common.core.js')
+  script(src='/css/RGraph.common.effects.js')
+  script(src='/css/RGraph.hbar.js')
+  script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+  canvas#cvs(width='600', height='230') [No canvas support]
+  script.
+    $(document).ready(function ()
+    {
+    var hbar = new RGraph.HBar({
+    id: 'cvs',
+    data: #{reviewArray},
+    options: {
+    background: {
+    grid: false
+    },
+    xmax: #{maxReviewNumber},
+    scale: {
+    decimals: 1
+    },
+    colors: {
+    self: ['#FFDE00'],
+    sequential: true
+    },
+    labels: {
+    self: ['5 star','4 star','3 star','2 star','1 star',],
+    above: {
+    self: true,
+    decimals: 1
+    }
+    },
+    noxaxis: true,
+    gutter: {
+    left: 125
+    },
+    xlabels: false
+    }
+    }).grow()
+    })
+ //end of review bars
   h3       
     span.label.label-success Top Positive Reviews:
   ul.list-group                      

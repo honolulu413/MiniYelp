@@ -11,6 +11,7 @@ var express = require('express')
  , routes = require('./routes')
  , register = require('./routes/register')
  , login = require('./routes/login')
+ , signup = require('./routes/signup')
  , facebook_login = require('./routes/facebook_login')
  , user = require('./routes/user')
  , http = require('http')
@@ -24,8 +25,12 @@ var express = require('express')
  , invite = require('./routes/invite')
  , add_friend = require('./routes/add_friend')
  , message = require('./routes/message')
+ , search_user = require('./routes/search_user')
  , google = require('./routes/google')
  , facebook = require('./routes/facebook')
+ , edit = require('./routes/edit')
+ , bar = require('./routes/bar')
+
  ;
 var bing = require('./routes/bing');
 var session = require('express-session');
@@ -36,26 +41,30 @@ var app = express();
 init_app(app);
 
 // When we get a request for {app}/ we should call routes/index.js
-app.get('/', routes.do_work);
-app.get('/login', login.do_work);
+app.get('/login', login.get);
+app.get('/user/*/edit', edit.get);
 app.get('/user*', user.get);
 app.get('/business_list', business_list.get);
 app.get('/business*', businesses.get);
 app.get('/logout', logout.get);
 app.get('/favorite', favorite.get);
+app.get('/signup',signup.do_work);
 app.get('/google', google.do_work);
+app.get('/facebook', facebook.do_work);
+app.get('/search_user', search_user.get);
+app.get('/', login.get);
+app.get('/bar', bar.do_work);
+
 
 app.post('/invite', invite.post);
 app.post('/bing', bing.post);
-
 app.post('/register', register.post);
 app.post('/login', login.post);
 app.post('/facebook_login', facebook_login.post);
 app.post('/favorite', favorite.post);
 app.post('/user/add_friend', add_friend.post);
 app.post('/user/send_message', message.post);
-app.get('/facebook', facebook.do_work);
-
+app.post('/user/*/edit', edit.post);
 
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function() {

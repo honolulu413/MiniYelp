@@ -15,5 +15,12 @@
           li: a(href='#favourites') Favourite restaurants
           li: a(href='#search') Search a restaurant
           form.navbar-form.navbar-right(method="get", action='/logout')
-            button.btn.btn-primary.navbar-btn(type='submit',style = "margin-bottom: 10px;") Log out
+            button.btn.btn-info.navbar-btn(type='submit',style = "margin-bottom: 10px;")
+              span.glyphicon.glyphicon-log-out(aria-hidden='true')
+
+          form.navbar-form.navbar-right(method="get", action='/user/#{user_name}/edit')
+            button.btn.btn-info.navbar-btn.navbar-right(type='submit',style = "margin-bottom: 10px;")
+              span.glyphicon.glyphicon-user(aria-hidden='true')
+                 
+            
        

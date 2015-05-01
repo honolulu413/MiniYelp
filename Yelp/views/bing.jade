@@ -3,8 +3,28 @@
 include ./includes/header_for_page.jade
 include ./includes/row_list.jade
 
+<<<<<<< HEAD
+
+  p
+    | Top #{searchResults.length} search results by Bing
+    br
+    br
+  - for (var i = 0; i < searchResults.length; i++)
+    a(href=searchResults[i]["Url"]) Result#{i+1}:    
+    br  
+    br      
+    | Title: &nbsp #{searchResults[i]["Title"]}
+    br 
+    br
+    | Description: &nbsp #{searchResults[i]["Description"]}
+    br 
+    br
+    br 
+      
+=======
 extend layoutSimple
 block header
   +extend_pageheader(userName)
 block content
   +extend_row_array(searchResults)
+>>>>>>> branch 'master' of https://github.com/sylsgl/550.git
